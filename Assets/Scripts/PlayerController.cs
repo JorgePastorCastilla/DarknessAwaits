@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,37 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private float transitionSpeed = 10f;
+    private float unitsPerMovement = 5f;
+    private float transitionSpeed = 30f;
     private float transitionRotationSpeed = 500f;
 
+    private Vector3 lastDirection = Vector3.zero;
+    private bool positiveLastDirection = false;
 
     private Vector3 targetGridPosition;
     private Vector3 prevTargetGridPosition;
     private Vector3 targetRotation;
 
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("Collision Wall");
+            Debug.Log($"Is at Rest:{IsAtRest()}");
+            Debug.Log($"transform position:{transform.position}");
+            Debug.Log($"TargetGridPosition:{targetGridPosition}");
+            MovePlayer(lastDirection, !positiveLastDirection);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        // if (other.gameObject.CompareTag("Wall"))
+        // {
+        //     MovePlayer(lastDirection, !positiveLastDirection);
+        // }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,19 +58,27 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            MovePlayer(transform.forward, true);
+            lastDirection = transform.forward * unitsPerMovement;
+            positiveLastDirection = true;
+            MovePlayer(lastDirection, positiveLastDirection);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            MovePlayer(transform.forward, false);
+            lastDirection = transform.forward * unitsPerMovement;
+            positiveLastDirection = false;
+            MovePlayer(lastDirection, positiveLastDirection);
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            MovePlayer(transform.right, false);
+            lastDirection = transform.right * unitsPerMovement;
+            positiveLastDirection = false;
+            MovePlayer(lastDirection, positiveLastDirection);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            MovePlayer(transform.right, true);
+            lastDirection = transform.right * unitsPerMovement;
+            positiveLastDirection = true;
+            MovePlayer(lastDirection, positiveLastDirection);
         }
     }
     private void FixedUpdate()
@@ -92,13 +124,16 @@ public class PlayerController : MonoBehaviour
     }
     public void MovePlayer(Vector3 direction, bool positive)
     {
-        targetGridPosition = (positive) ? targetGridPosition + direction : targetGridPosition - direction;
+        if (IsAtRest())
+        {
+            targetGridPosition = (positive) ? targetGridPosition + direction : targetGridPosition - direction;    
+        }
     }
 
 
     private bool IsAtRest()
     {
-        return (Vector3.Distance(transform.position, targetGridPosition) < 0.05f && Vector3.Distance(transform.eulerAngles, targetRotation) < 0.05f);
+        return (Vector3.Distance(transform.position, targetGridPosition) < 0.5f && Vector3.Distance(transform.eulerAngles, targetRotation) < 0.5f);
     }
 
 
