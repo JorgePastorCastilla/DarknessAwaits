@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour
 {
 
     private float unitsPerMovement = 5f;
-    private float transitionSpeed = 30f;
+    [SerializeField]
+    private float transitionSpeed = 40f;
     private float transitionRotationSpeed = 500f;
 
+    private Vector3 restorePosition = Vector3.zero;
     private Vector3 lastDirection = Vector3.zero;
     private bool positiveLastDirection = false;
 
@@ -22,20 +24,18 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("Collision Wall");
-            Debug.Log($"Is at Rest:{IsAtRest()}");
-            Debug.Log($"transform position:{transform.position}");
-            Debug.Log($"TargetGridPosition:{targetGridPosition}");
+            // Debug.Log("Collision Wall");
+            // Debug.Log($"Is at Rest:{IsAtRest()}");
+            // Debug.Log($"transform position:{transform.position}");
+            // Debug.Log($"TargetGridPosition:{targetGridPosition}");
+            // Debug.Log($"Distance:{Vector3.Distance(transform.position, targetGridPosition)}");
+            // Debug.Log($"Distance Rotation:{Vector3.Distance(transform.eulerAngles, targetRotation)}");
+            
             MovePlayer(lastDirection, !positiveLastDirection);
+            Vector3 newDirection = transform.position - restorePosition;
+            // Debug.Log($"NEW DIRECTION:{newDirection}");
+            // ForceMovePlayer(newDirection, false);
         }
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        // if (other.gameObject.CompareTag("Wall"))
-        // {
-        //     MovePlayer(lastDirection, !positiveLastDirection);
-        // }
     }
 
     // Start is called before the first frame update
@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log($"Restore Position:{restorePosition}");
+        Debug.Log($"Current Position:{transform.position}");
         if ( Input.GetKeyDown(KeyCode.A) )
         {
             RotateLeft();
@@ -122,10 +124,16 @@ public class PlayerController : MonoBehaviour
             targetRotation += Vector3.up * 90f;
         }
     }
+
+    // public void ForceMovePlayer(Vector3 direction, bool positive)
+    // {
+    //     targetGridPosition = (positive) ? targetGridPosition + direction : targetGridPosition - direction;
+    // }
     public void MovePlayer(Vector3 direction, bool positive)
     {
         if (IsAtRest())
         {
+            restorePosition = transform.position;
             targetGridPosition = (positive) ? targetGridPosition + direction : targetGridPosition - direction;    
         }
     }
