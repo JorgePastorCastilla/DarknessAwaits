@@ -19,10 +19,27 @@ public class PlayerController : MonoBehaviour
     private Vector3 prevTargetGridPosition;
     private Vector3 targetRotation;
 
+    public GameObject camera;
+    private Vector3 cameraStaticPosition;
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Wall")
+        {
+            cameraStaticPosition = camera.transform.position;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        cameraStaticPosition = new Vector3(0,1,0);
+        
+        camera.transform.localPosition = cameraStaticPosition;
+    }
 
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.CompareTag("Wall"))
+        if (other.gameObject.tag == "Wall")
         {
             // Debug.Log("Collision Wall");
             // Debug.Log($"Is at Rest:{IsAtRest()}");
@@ -33,6 +50,7 @@ public class PlayerController : MonoBehaviour
             
             MovePlayer(lastDirection, !positiveLastDirection);
             Vector3 newDirection = transform.position - restorePosition;
+            camera.transform.position = cameraStaticPosition;
             // Debug.Log($"NEW DIRECTION:{newDirection}");
             // ForceMovePlayer(newDirection, false);
         }
