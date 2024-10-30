@@ -40,19 +40,10 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay(Collision other)
     {
         if (other.gameObject.tag == "Wall")
-        {
-            // Debug.Log("Collision Wall");
-            // Debug.Log($"Is at Rest:{IsAtRest()}");
-            // Debug.Log($"transform position:{transform.position}");
-            // Debug.Log($"TargetGridPosition:{targetGridPosition}");
-            // Debug.Log($"Distance:{Vector3.Distance(transform.position, targetGridPosition)}");
-            // Debug.Log($"Distance Rotation:{Vector3.Distance(transform.eulerAngles, targetRotation)}");
-            
+        {          
             MovePlayer(lastDirection, !positiveLastDirection);
             Vector3 newDirection = transform.position - restorePosition;
             camera.transform.position = cameraStaticPosition;
-            // Debug.Log($"NEW DIRECTION:{newDirection}");
-            // ForceMovePlayer(newDirection, false);
         }
     }
 
@@ -143,10 +134,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // public void ForceMovePlayer(Vector3 direction, bool positive)
-    // {
-    //     targetGridPosition = (positive) ? targetGridPosition + direction : targetGridPosition - direction;
-    // }
     public void MovePlayer(Vector3 direction, bool positive)
     {
         if (IsAtRest())
