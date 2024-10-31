@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 
     private float unitsPerMovement = 5f;
     [SerializeField]
-    private float transitionSpeed = 40f;
-    private float transitionRotationSpeed = 500f;
+    private float transitionSpeed = 20f;
+    [SerializeField]
+    private float transitionRotationSpeed = 350f;
 
     private Vector3 restorePosition = Vector3.zero;
     private Vector3 lastDirection = Vector3.zero;
@@ -21,20 +22,21 @@ public class PlayerController : MonoBehaviour
 
     public GameObject camera;
     private Vector3 cameraStaticPosition;
+    private bool cameraCanReturn = false;
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Wall")
         {
-            cameraStaticPosition = camera.transform.position;
+            cameraStaticPosition = Vector3Int.RoundToInt(camera.transform.position);
+            cameraCanReturn = false;
+            transitionSpeed *= 2;
         }
     }
 
     private void OnCollisionExit(Collision other)
     {
-        cameraStaticPosition = new Vector3(0,1,0);
-        
-        camera.transform.localPosition = cameraStaticPosition;
+        transitionSpeed /= 2;
     }
 
     private void OnCollisionStay(Collision other)
@@ -42,8 +44,15 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Wall")
         {          
             MovePlayer(lastDirection, !positiveLastDirection);
-            Vector3 newDirection = transform.position - restorePosition;
-            camera.transform.position = cameraStaticPosition;
+            
+            bool xIsNear = Math.Abs(transform.position.x - camera.transform.position.x) < 0.05f;
+            bool zIsNear = Math.Abs(transform.position.z - camera.transform.position.z) < 0.05f;
+            if (xIsNear && zIsNear)
+            {
+                  cameraCanReturn = true;
+            }
+            
+          
         }
     }
 
@@ -51,6 +60,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         targetGridPosition = Vector3Int.RoundToInt(transform.position);
+        cameraStaticPosition = camera.transform.position;
     }
 
     // Update is called once per frame
@@ -69,34 +79,55 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            lastDirection = transform.forward * unitsPerMovement;
-            positiveLastDirection = true;
+            if (IsAtRest())
+            {
+                lastDirection = transform.forward * unitsPerMovement;
+                positiveLastDirection = true;    
+            }
             MovePlayer(lastDirection, positiveLastDirection);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            lastDirection = transform.forward * unitsPerMovement;
-            positiveLastDirection = false;
+            if (IsAtRest())
+            {
+                lastDirection = transform.forward * unitsPerMovement;
+                positiveLastDirection = false;
+            }
             MovePlayer(lastDirection, positiveLastDirection);
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            lastDirection = transform.right * unitsPerMovement;
-            positiveLastDirection = false;
+            if (IsAtRest())
+            {
+                lastDirection = transform.right * unitsPerMovement;
+                positiveLastDirection = false;
+            }
             MovePlayer(lastDirection, positiveLastDirection);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            lastDirection = transform.right * unitsPerMovement;
-            positiveLastDirection = true;
+            if (IsAtRest())
+            {
+                lastDirection = transform.right * unitsPerMovement;
+                positiveLastDirection = true;
+            }
+
             MovePlayer(lastDirection, positiveLastDirection);
         }
     }
     private void FixedUpdate()
     {
         MovePlayer();
+        if (cameraCanReturn)
+        {
+            camera.transform.position = cameraStaticPosition;
+        }
+        else
+        {
+            camera.transform.localPosition = new Vector3(0,1,0);
+        }
     }
-
+    
     private void MovePlayer()
     {
 

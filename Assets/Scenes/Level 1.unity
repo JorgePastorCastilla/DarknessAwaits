@@ -2053,7 +2053,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e571e3082c0e4c4c83916cd89d4c230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionSpeed: 40
+  transitionSpeed: 20
+  transitionRotationSpeed: 350
   camera: {fileID: 963194225}
 --- !u!4 &1618195778
 Transform:
