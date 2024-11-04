@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject camera;
     private Vector3 cameraStaticPosition;
-    private bool cameraCanReturn = false;
     private bool cameraCanMove = true;
+    private bool playerOnWallCanReturn = false;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         {
             cameraStaticPosition = Vector3Int.RoundToInt(camera.transform.position);
             cameraCanMove = false;
+            playerOnWallCanReturn = true;
             transitionSpeed *= 2;
         }
     }
@@ -43,19 +44,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall" && playerOnWallCanReturn)
         {          
             MovePlayer(lastDirection, !positiveLastDirection);
-            
-            /*bool xIsNear = Math.Abs(transform.position.x - camera.transform.position.x) < 0.05f;
-            bool zIsNear = Math.Abs(transform.position.z - camera.transform.position.z) < 0.05f;
-            if (xIsNear && zIsNear)
-            {
-                  cameraCanReturn = false;
-            }*/
-            
-          
         }
+        /*if(!cameraCanMove){
+            float distanceX = Math.Abs(transform.position.x - camera.transform.position.x);
+            float distanceY = Math.Abs(transform.position.y - camera.transform.position.y);
+            if( (distanceX < 0.05f) && (distanceY < 0.05) ){
+                cameraCanMove =true;
+            }
+        }*/
+        
     }
 
     // Start is called before the first frame update
@@ -68,7 +68,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"Camera can return:{cameraCanReturn}");
+        Debug.Log($"Camera can move:{cameraCanMove}");
+        //TODO: USE VARIABLES LIKE FORWARD,BACKWARD, RIGHT, LEFT AND CHANGE THEM AS WE ROTATE
+        //TODO: CAMBIAR AL NEW INPUT SYSTEM
         if ( Input.GetKeyDown(KeyCode.A) )
         {
             RotateLeft();
@@ -115,18 +117,13 @@ public class PlayerController : MonoBehaviour
 
             MovePlayer(lastDirection, positiveLastDirection);
         }
+        
+        
+        
     }
     private void FixedUpdate()
     {
         MovePlayer();
-        /*if (cameraCanReturn)
-        {
-            camera.transform.position = cameraStaticPosition;
-        }
-        else
-        {
-            camera.transform.localPosition = new Vector3(0,1,0);
-        }*/
     }
     
     private void MovePlayer()
@@ -179,6 +176,9 @@ public class PlayerController : MonoBehaviour
         {
             restorePosition = transform.position;
             targetGridPosition = (positive) ? targetGridPosition + direction : targetGridPosition - direction;    
+            if(playerOnWallCanReturn){
+                playerOnWallCanReturn = false;
+            }
         }
     }
 
