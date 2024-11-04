@@ -23,19 +23,21 @@ public class PlayerController : MonoBehaviour
     public GameObject camera;
     private Vector3 cameraStaticPosition;
     private bool cameraCanReturn = false;
+    private bool cameraCanMove = true;
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Wall")
         {
             cameraStaticPosition = Vector3Int.RoundToInt(camera.transform.position);
-            cameraCanReturn = false;
+            cameraCanMove = false;
             transitionSpeed *= 2;
         }
     }
 
     private void OnCollisionExit(Collision other)
     {
+        cameraCanMove = true;
         transitionSpeed /= 2;
     }
 
@@ -45,12 +47,12 @@ public class PlayerController : MonoBehaviour
         {          
             MovePlayer(lastDirection, !positiveLastDirection);
             
-            bool xIsNear = Math.Abs(transform.position.x - camera.transform.position.x) < 0.05f;
+            /*bool xIsNear = Math.Abs(transform.position.x - camera.transform.position.x) < 0.05f;
             bool zIsNear = Math.Abs(transform.position.z - camera.transform.position.z) < 0.05f;
             if (xIsNear && zIsNear)
             {
-                  cameraCanReturn = true;
-            }
+                  cameraCanReturn = false;
+            }*/
             
           
         }
@@ -66,8 +68,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"Restore Position:{restorePosition}");
-        Debug.Log($"Current Position:{transform.position}");
+        Debug.Log($"Camera can return:{cameraCanReturn}");
         if ( Input.GetKeyDown(KeyCode.A) )
         {
             RotateLeft();
@@ -118,14 +119,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        if (cameraCanReturn)
+        /*if (cameraCanReturn)
         {
             camera.transform.position = cameraStaticPosition;
         }
         else
         {
             camera.transform.localPosition = new Vector3(0,1,0);
-        }
+        }*/
     }
     
     private void MovePlayer()
@@ -144,9 +145,16 @@ public class PlayerController : MonoBehaviour
             targetRotation.y = 270f;
         }
 
+        Debug.Log($"TARGET POSITION:{targetPosition}");
+
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
-        
+        camera.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
+        if (cameraCanMove)
+        {
+            camera.transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);
+        }
+
     }
 
 
