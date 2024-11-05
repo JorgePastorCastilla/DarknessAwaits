@@ -1966,6 +1966,12 @@ MonoBehaviour:
   transitionSpeed: 10
   transitionRotationSpeed: 350
   camera: {fileID: 963194225}
+  rotateRightAction: {fileID: -1017544539693601441, guid: bd657b57ca2f6ac4d811bf188014d7b1, type: 3}
+  rotateLeftAction: {fileID: 3353950478685435737, guid: bd657b57ca2f6ac4d811bf188014d7b1, type: 3}
+  moveForwardAction: {fileID: -991526115707372588, guid: bd657b57ca2f6ac4d811bf188014d7b1, type: 3}
+  moveBackwardAction: {fileID: -1966064872803226608, guid: bd657b57ca2f6ac4d811bf188014d7b1, type: 3}
+  moveRightAction: {fileID: -1430860566853159811, guid: bd657b57ca2f6ac4d811bf188014d7b1, type: 3}
+  moveLeftAction: {fileID: -4145334831597586468, guid: bd657b57ca2f6ac4d811bf188014d7b1, type: 3}
 --- !u!4 &1618195778
 Transform:
   m_ObjectHideFlags: 0
@@ -2007,7 +2013,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 4}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1677800930
 GameObject:
@@ -2644,6 +2650,14 @@ PrefabInstance:
     - target: {fileID: 5137492905497903920, guid: 26bb5522b06c86d4e94656beaae9814b, type: 3}
       propertyPath: m_Name
       value: Pared (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137492905497903921, guid: 26bb5522b06c86d4e94656beaae9814b, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137492905497903921, guid: 26bb5522b06c86d4e94656beaae9814b, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5137492905497903932, guid: 26bb5522b06c86d4e94656beaae9814b, type: 3}
       propertyPath: m_RootOrder
