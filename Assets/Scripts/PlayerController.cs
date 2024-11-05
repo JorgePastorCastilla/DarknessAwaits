@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetGridPosition;
     private Vector3 targetRotation;
 
-    public GameObject camera;
-    private bool cameraCanMove = true;
+    // public GameObject camera;
+    // private bool cameraCanMove = true;
     
     public InputActionReference moveAction;
 
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Wall")
         {
-            cameraCanMove = false;
+            // cameraCanMove = false;
             // transitionSpeed *= 2;
             targetGridPosition = restorePosition;
         }
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision other)
     {
-        cameraCanMove = true;
+        // cameraCanMove = true;
         // transitionSpeed /= 2;
     }
     
@@ -46,13 +46,14 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targetGridPosition = Vector3Int.RoundToInt(transform.position);
+        // targetGridPosition = Vector3Int.RoundToInt(transform.position);
+        targetGridPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"Camera can move:{cameraCanMove}");
+        // Debug.Log($"Camera can move:{cameraCanMove}");
         //TODO: USE VARIABLES LIKE FORWARD,BACKWARD, RIGHT, LEFT AND CHANGE THEM AS WE ROTATE
         //TODO: CAMBIAR AL NEW INPUT SYSTEM
         if ( Input.GetKeyDown(KeyCode.A) )
@@ -127,11 +128,11 @@ public class PlayerController : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
-        camera.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
-        if (cameraCanMove)
-        {
-            camera.transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);
-        }
+        // camera.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
+        // if (cameraCanMove)
+        // {
+        //     camera.transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);
+        // }
 
     }
 
