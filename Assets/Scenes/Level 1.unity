@@ -2007,7 +2007,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 4}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1677800930
 GameObject:
@@ -2644,6 +2644,14 @@ PrefabInstance:
     - target: {fileID: 5137492905497903920, guid: 26bb5522b06c86d4e94656beaae9814b, type: 3}
       propertyPath: m_Name
       value: Pared (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137492905497903921, guid: 26bb5522b06c86d4e94656beaae9814b, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137492905497903921, guid: 26bb5522b06c86d4e94656beaae9814b, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5137492905497903932, guid: 26bb5522b06c86d4e94656beaae9814b, type: 3}
       propertyPath: m_RootOrder

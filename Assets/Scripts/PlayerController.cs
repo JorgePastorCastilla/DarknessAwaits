@@ -17,52 +17,39 @@ public class PlayerController : MonoBehaviour
     private bool positiveLastDirection = false;
 
     private Vector3 targetGridPosition;
-    private Vector3 prevTargetGridPosition;
     private Vector3 targetRotation;
 
     public GameObject camera;
-    private Vector3 cameraStaticPosition;
     private bool cameraCanMove = true;
-    private bool playerOnWallCanReturn = false;
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Wall")
         {
-            cameraStaticPosition = Vector3Int.RoundToInt(camera.transform.position);
             cameraCanMove = false;
-            playerOnWallCanReturn = true;
-            transitionSpeed *= 2;
+            // transitionSpeed *= 2;
+            targetGridPosition = restorePosition;
         }
     }
 
     private void OnCollisionExit(Collision other)
     {
         cameraCanMove = true;
-        transitionSpeed /= 2;
+        // transitionSpeed /= 2;
     }
 
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == "Wall" && playerOnWallCanReturn)
-        {          
-            MovePlayer(lastDirection, !positiveLastDirection);
-        }
-        /*if(!cameraCanMove){
-            float distanceX = Math.Abs(transform.position.x - camera.transform.position.x);
-            float distanceY = Math.Abs(transform.position.y - camera.transform.position.y);
-            if( (distanceX < 0.05f) && (distanceY < 0.05) ){
-                cameraCanMove =true;
-            }
-        }*/
-        
+        // if (other.gameObject.tag == "Wall")
+        // {          
+        //     MovePlayer(lastDirection, !positiveLastDirection);
+        // }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         targetGridPosition = Vector3Int.RoundToInt(transform.position);
-        cameraStaticPosition = camera.transform.position;
     }
 
     // Update is called once per frame
@@ -128,9 +115,6 @@ public class PlayerController : MonoBehaviour
     
     private void MovePlayer()
     {
-
-        prevTargetGridPosition = targetGridPosition;
-
         Vector3 targetPosition = targetGridPosition;
 
         if (targetRotation.y > 270f && targetRotation.y < 361f)
@@ -176,16 +160,14 @@ public class PlayerController : MonoBehaviour
         {
             restorePosition = transform.position;
             targetGridPosition = (positive) ? targetGridPosition + direction : targetGridPosition - direction;    
-            if(playerOnWallCanReturn){
-                playerOnWallCanReturn = false;
-            }
+
         }
     }
 
 
     private bool IsAtRest()
     {
-        return (Vector3.Distance(transform.position, targetGridPosition) < 0.5f && Vector3.Distance(transform.eulerAngles, targetRotation) < 0.5f);
+        return (Vector3.Distance(transform.position, targetGridPosition) < 0.05f && Vector3.Distance(transform.eulerAngles, targetRotation) < 0.05f);
     }
 
 
