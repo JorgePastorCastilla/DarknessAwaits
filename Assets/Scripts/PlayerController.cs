@@ -20,16 +20,25 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetGridPosition;
     private Vector3 targetRotation;
 
+<<<<<<< HEAD
     // public GameObject camera;
     // private bool cameraCanMove = true;
     
     public InputActionReference moveAction;
+=======
+    public GameObject camera;
+    private bool cameraCanMove = true;
+>>>>>>> 14ef7b77da0816b766a77a083d8c3eacd2c536da
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Wall")
         {
+<<<<<<< HEAD
             // cameraCanMove = false;
+=======
+            cameraCanMove = false;
+>>>>>>> 14ef7b77da0816b766a77a083d8c3eacd2c536da
             // transitionSpeed *= 2;
             targetGridPosition = restorePosition;
         }
@@ -37,8 +46,21 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision other)
     {
+<<<<<<< HEAD
         // cameraCanMove = true;
         // transitionSpeed /= 2;
+=======
+        cameraCanMove = true;
+        // transitionSpeed /= 2;
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        // if (other.gameObject.tag == "Wall")
+        // {          
+        //     MovePlayer(lastDirection, !positiveLastDirection);
+        // }
+>>>>>>> 14ef7b77da0816b766a77a083d8c3eacd2c536da
     }
     
     
@@ -46,8 +68,12 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< HEAD
         // targetGridPosition = Vector3Int.RoundToInt(transform.position);
         targetGridPosition = transform.position;
+=======
+        targetGridPosition = Vector3Int.RoundToInt(transform.position);
+>>>>>>> 14ef7b77da0816b766a77a083d8c3eacd2c536da
     }
 
     // Update is called once per frame
