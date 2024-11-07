@@ -2414,11 +2414,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858544331064466743, guid: 8e09d018df612b84d969cac066b0adaa, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99282014
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7858544331064466743, guid: 8e09d018df612b84d969cac066b0adaa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.11961695
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858544331064466743, guid: 8e09d018df612b84d969cac066b0adaa, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2430,7 +2430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858544331064466743, guid: 8e09d018df612b84d969cac066b0adaa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -13.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858544331064466743, guid: 8e09d018df612b84d969cac066b0adaa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2472,8 +2472,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 46.26087, y: 11.876072, z: 49.770203}
-  m_Center: {x: 1.2291479, y: -1.63404, z: -24.38509}
+  m_Size: {x: 50, y: 12.5, z: 50}
+  m_Center: {x: 0, y: 0, z: -20}
 --- !u!1 &1878772128
 GameObject:
   m_ObjectHideFlags: 0
