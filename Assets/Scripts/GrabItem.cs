@@ -30,7 +30,7 @@ public class GrabItem : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKey(KeyCode.F))
             {
                 grabItem.SetActive(true);
                 text.SetActive(false);
