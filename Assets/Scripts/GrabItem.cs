@@ -8,6 +8,7 @@ public class GrabItem : MonoBehaviour
     
     public GameObject grabItem;
     public GameObject text;
+    private bool canGrabItem = false;
     
     // Start is called before the first frame update
     void Start()
@@ -18,19 +19,9 @@ public class GrabItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        text.SetActive(true);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player")
+        if (canGrabItem)
         {
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 grabItem.SetActive(true);
                 text.SetActive(false);
@@ -39,8 +30,20 @@ public class GrabItem : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        text.SetActive(true);
+        canGrabItem = true;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         text.SetActive(false);
+        canGrabItem = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        canGrabItem = other.gameObject.CompareTag("Player");
     }
 }

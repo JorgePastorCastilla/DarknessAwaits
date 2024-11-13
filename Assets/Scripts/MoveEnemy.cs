@@ -16,7 +16,7 @@ public class MoveEnemy : MonoBehaviour
     void Update()
     {
         //MOVIMIENTO MEDIANTE ACTUALIZAR EL TRANSFORM
-        //transform.position += Vector3.up * Time.deltaTime * speed;
+        //transform.finalPosition += Vector3.up * Time.deltaTime * speed;
         //MOVIMIENTO MEDIANTE FUERZAS
         // transform.Translate(Vector3.up * speed * Time.deltaTime);
         // transform.Translate(new Vector3(speed * Time.deltaTime,0,0) );
@@ -25,7 +25,7 @@ public class MoveEnemy : MonoBehaviour
             direction = (direction == Vector3.down) ? Vector3.up : Vector3.down;
         }
 
-        // transform.position += direction * Time.deltaTime * speed;
+        // transform.finalPosition += direction * Time.deltaTime * speed;
         transform.Translate( direction * speed * Time.deltaTime );
     }
 }
