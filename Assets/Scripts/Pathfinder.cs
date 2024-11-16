@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,21 +10,27 @@ public class Pathfinder : MonoBehaviour
 {
     public Vector3 finalPosition;
     public Vector3 startPosition;
-    private List<Cell> grid = new List<Cell>();
+    private List<Vector3> foundCells = new List<Vector3>();
+    private List<Vector3> alreadyCheckCells = new List<Vector3>();
+    
     [SerializeField]
-    private List<Transform> patrolPath = new List<Transform>();
+    // private List<Transform> patrolPath = new List<Transform>();
+    private List<Cell> patrolPath = new List<Cell>();
+    
+    private Vector3[] directions = {
+        Vector3.forward * GameManager.gridCellSize,
+        Vector3.back * GameManager.gridCellSize,
+        Vector3.left * GameManager.gridCellSize,
+        Vector3.right * GameManager.gridCellSize
+    };
     
     // Start is called before the first frame update
     void Start()
     {
-        startPosition = transform.position;
-        CreateGrid();
-        SetGridCellValues();
-        Debug.Log(grid.Count());
-        // foreach (Cell cell in grid)
-        // {
-        //     Debug.Log($"Cell x:{cell.x} z:{cell.z} walkable:{cell.walkable}");
-        // }
+        // startPosition = transform.position;
+        // patrolPath = FindPath(startPosition, finalPosition);
+        
+        // Debug.Log(patrolPath.Count);
     }
 
     // Update is called once per frame
@@ -33,78 +40,146 @@ public class Pathfinder : MonoBehaviour
         //Debug.Log(isObjectHere(transform.position+finalPosition));
     }
 
-    private void CreateGrid()
+    public List<Vector3> FindPath(Vector3 startPosition, Vector3 finalPosition)
     {
+        Cell StartCell = new Cell(startPosition);
+        StartCell.calculateGHF(startPosition, finalPosition);
         
-        //Comprobar como hacer que coja las casillas correctamente
-        // float currentXPosition = transform.position.x;
-        // float currentZPosition = transform.position.z;
-        
-        float currentXPosition = -12.5f;
-        float currentZPosition = -12.5f;
-        
-        // float finalXPosition = finalPosition.x;
-        // float finalZPosition = finalPosition.z;
-        
-        float finalXPosition = 22.5f;
-        float finalZPosition = 12.5f;
-        
-        float xDifference = Math.Abs( currentXPosition - finalXPosition );
-        float zDifference = Math.Abs( currentZPosition - finalZPosition );
-        Debug.Log($"xDifference: {xDifference} / zDifference: {zDifference}");
-        xDifference = (xDifference / GameManager.gridCellSize)+1;
-        zDifference = (zDifference / GameManager.gridCellSize)+1;
-        Debug.Log($"xDifference: {xDifference} / zDifference: {zDifference}");
-        Debug.Log($"xDifference Floor: {Math.Floor(xDifference)} / zDifference Floor: {Math.Floor(zDifference)}");
-        float currentX = 0f;
-        float currentZ = 0f;
-        for (int x =0; x < Math.Floor(xDifference); x++)
+        List<Vector3> path = new List<Vector3>();
+        List<Cell> foundCells = new List<Cell>();
+        List<Cell> alreadyCheckCells = new List<Cell>();
+
+        foundCells.Add(StartCell);
+        Cell currentCell = StartCell;
+        while ( !positionIsInCells(alreadyCheckCells, finalPosition) )
         {
-            currentX = currentXPosition + (x * GameManager.gridCellSize);
-            for (float z =0; z < Math.Floor(zDifference); z++)
+            foundCells = foundCells.OrderBy(x => x.f).ToList();
+            int i = 0;
+            currentCell = foundCells[i];
+            while (positionIsInCells(alreadyCheckCells, currentCell.position))
             {
-               currentZ = currentZPosition + (z * GameManager.gridCellSize); 
-               
-               Vector3 cellPosition = new Vector3(currentX, gameObject.transform.position.y, currentZ);
-               bool walkable = !isObjectHere(cellPosition);
-               Cell cell = new Cell(currentX, currentZ, walkable);
-               
-               grid.Add(cell);
+                
+                if (i < foundCells.Count - 1)
+                {
+                    i++;    
+                }
+                currentCell = foundCells[i];
+            }
+            List<Cell> neighbours = GetNeighbours( currentCell );
+            foreach (Cell cell in neighbours)
+            {
+                if ( !positionIsInCells(foundCells, cell.position) )
+                {
+                    foundCells.Add(cell);
+                }
+            }
+
+            alreadyCheckCells.Add(currentCell);
+        }
+        
+        Cell endCell = GetCellByPosition(alreadyCheckCells,finalPosition);
+        
+        foreach (Cell cell in GetPathFromFinalCell(endCell))
+        {
+            path.Add(cell.position);
+        }
+        return path;
+    }
+
+
+
+    private Cell GetCellByPosition(List<Cell> cells, Vector3 position)
+    {
+        foreach (Cell cell in cells)
+        {
+            if (Vector3.Distance(position, cell.position) < 0.05f)
+            {
+                return cell;
             }
         }
+
+        return null;
     }
 
-    private void GetNeighbours(Cell cell)
+    private List<Cell> GetPathFromFinalCell(Cell finalCell)
     {
-        
-    }
-
-    private void SetGridCellValues()
-    {
-        foreach (Cell cell in grid)
+        List<Cell> path = new List<Cell>();
+        Cell currentCell = finalCell;
+        while (currentCell.parent != null)
         {
-            Vector3 cellPosition = new Vector3(cell.x, gameObject.transform.position.y, cell.z);
-            float distanceFromStart = Vector3.Distance(cellPosition, startPosition);
-            cell.g = distanceFromStart;
-
-            float distanceToFinish = Vector3.Distance(cellPosition, finalPosition);
-            cell.h = distanceToFinish;
-            cell.f = cell.g + cell.h;
+            path.Add(currentCell);
+            currentCell = currentCell.parent;
         }
+        path.Add(currentCell);
+        
+        path.Reverse();
+        
+        return path;
     }
+    
+
+    private bool positionIsInCells(List<Cell> cells, Vector3 position)
+    {
+        foreach (Cell cell in cells)
+        {
+            if (Vector3.Distance(cell.position, position) < 0.05f)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private List<Cell> GetNeighbours(Cell cell)
+    {
+        Vector3 cellPosition = cell.position;
+        List<Cell> neighboursCells = new List<Cell>();
+        
+        for (int i = 0; i < directions.Length; i++)
+        {
+            Vector3 neighbourPosition = cellPosition + directions[i];
+            if ( !isObjectHere(neighbourPosition) )
+            {
+                Cell neighbour = new Cell(neighbourPosition, cell);
+                neighbour.calculateGHF(startPosition, finalPosition);
+                
+                neighboursCells.Add(neighbour);
+            }
+        }
+        return neighboursCells;
+    }
+    
     //Method to check if there is an object at given position
     private bool isObjectHere(Vector3 position)
     {
         Collider[] intersecting = Physics.OverlapSphere(position, 0.01f);
-        return (intersecting.Length != 0);
+        // return (intersecting.Length != 0);
+        //The code below checks if there is a wall there and return true if there is
+        if (intersecting.Length != 0)
+        {
+            foreach (var obj in intersecting)
+            {
+                //TODO POSIBLE CHANGE INSTEAD OF COMPARING TO WALL CHECK VARIOUS TAGS FOR OBSTACLES
+                if ( intersecting[0].CompareTag("Wall") )
+                {
+                    return true;
+                }
+            }
+            
+        }
+        
+        return false;
+        
     }
 }
 
 public class Cell
 {
-    public float x;
-    public float z;
-    public bool walkable;
+    public Vector3 position;
+
+    public Cell parent;
+    // public bool walkable;
 
     // public float costFromStart;
     // public float costFromFinish;
@@ -114,10 +189,20 @@ public class Cell
     //F -> G+H
     public float f, g, h;
 
-    public Cell(float x, float z, bool walkable)
+    public Cell(Vector3 position, Cell parent)
     {
-        this.x = x;
-        this.z = z;
-        this.walkable = walkable;
+        this.position = position;
+        this.parent = parent;
+    }
+    public Cell(Vector3 position)
+    {
+        this.position = position;
+    }
+
+    public void calculateGHF(Vector3 startPosition, Vector3 finalPosition)
+    {
+        this.g = Vector3.Distance(this.position, startPosition);
+        this.h = Vector3.Distance(this.position, finalPosition);
+        this.f = this.g + this.h;
     }
 }

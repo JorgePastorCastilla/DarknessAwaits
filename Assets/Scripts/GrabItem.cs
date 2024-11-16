@@ -23,9 +23,9 @@ public class GrabItem : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
+                gameObject.SetActive(false);
                 grabItem.SetActive(true);
                 text.SetActive(false);
-                gameObject.SetActive(false);
             }
         }
     }

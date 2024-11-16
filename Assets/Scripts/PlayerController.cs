@@ -27,19 +27,19 @@ public class PlayerController : MonoBehaviour
             playerMovement.RotateRight();
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             playerMovement.MovePlayer(transform.forward);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             playerMovement.MovePlayer(-transform.forward);
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
             playerMovement.MovePlayer(-transform.right);
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             playerMovement.MovePlayer(transform.right);
         }

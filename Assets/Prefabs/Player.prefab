@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a145f2c8b5b96774883b5fe3bc8b06ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectMaterial: {fileID: 2100000, guid: 3537c68b6eb5a5e429e125aea94dc39c, type: 2}
+  effectMaterial: {fileID: 2100000, guid: 2ad799cf0d081b04d990a3ff73c91aba, type: 2}
 --- !u!1 &6722434203096046580
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,8 +108,8 @@ GameObject:
   - component: {fileID: 6722434203096046582}
   - component: {fileID: 6722434203096046576}
   - component: {fileID: 6722434203096046583}
-  - component: {fileID: 6722434203096046581}
-  - component: {fileID: 1386225499320055670}
+  - component: {fileID: 3340520262158389738}
+  - component: {fileID: 4152236662134612552}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -162,7 +162,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &6722434203096046581
+--- !u!114 &3340520262158389738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,12 +171,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6722434203096046580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e571e3082c0e4c4c83916cd89d4c230, type: 3}
+  m_Script: {fileID: 11500000, guid: 81cbb11bf83dc994c939aa3a54478254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionSpeed: 10
+  transitionSpeed: 20
   transitionRotationSpeed: 350
---- !u!114 &1386225499320055670
+--- !u!114 &4152236662134612552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f287b8bb86d4c584eae74a116d404b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
+  playerMovement: {fileID: 3340520262158389738}
 --- !u!1001 &3478408547139527402
 PrefabInstance:
   m_ObjectHideFlags: 0

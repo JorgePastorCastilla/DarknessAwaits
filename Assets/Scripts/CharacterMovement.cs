@@ -8,15 +8,16 @@ public class CharacterMovement : MonoBehaviour
 {
 
     private float unitsPerMovement;
-    [SerializeField]
-    private float transitionSpeed = 20f;
-    [SerializeField]
+    private float transitionSpeed = 15f;
     private float transitionRotationSpeed = 350f;
 
     private Vector3 restorePosition = Vector3.zero;
 
-    private Vector3 targetGridPosition;
+    public Vector3 targetGridPosition;
     private Vector3 targetRotation;
+
+    private float moveCooldown = 0.5f;
+    private float lastTimeMoved = 0f;
     
 
     private void OnCollisionEnter(Collision other)
@@ -58,23 +59,26 @@ public class CharacterMovement : MonoBehaviour
     }
     public void RotateLeft()
     {
-        if ( IsAtRest())
+        if ( IsAtRest() )
         {
+            lastTimeMoved = Time.time;
             targetRotation -= Vector3.up * 90f;
         }
     }
     public void RotateRight()
     {
-        if (IsAtRest())
+        if ( IsAtRest() )
         {
+            lastTimeMoved = Time.time;
             targetRotation += Vector3.up * 90f;
         }
     }
 
     public void MovePlayer(Vector3 direction)
     {
-        if (IsAtRest())
+        if ( canMove() )
         {
+            lastTimeMoved = Time.time;
             direction = direction * unitsPerMovement;
             restorePosition = transform.position;
             // targetGridPosition = (positive) ? targetGridPosition + direction : targetGridPosition - direction;    
@@ -83,8 +87,12 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    private bool canMove()
+    {
+        return IsAtRest() && Time.time - lastTimeMoved > moveCooldown;
+    }
 
-    private bool IsAtRest()
+    public bool IsAtRest()
     {
         return (Vector3.Distance(transform.position, targetGridPosition) < 0.05f && Vector3.Distance(transform.eulerAngles, targetRotation) < 0.05f);
     }

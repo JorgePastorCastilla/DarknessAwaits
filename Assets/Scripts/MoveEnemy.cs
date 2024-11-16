@@ -4,28 +4,68 @@ using UnityEngine;
 
 public class MoveEnemy : MonoBehaviour
 {
-    float speed = 2.0f;
-    Vector3 direction = Vector3.down;
+    [SerializeField]
+    private Vector3 target;
+    private List<Vector3> path = new List<Vector3>();
+    private int currentNodeOfPath = 0;
+    [SerializeField]
+    private Pathfinder pathfinder;
+    public List<Transform> checkpoints;
+    private int currentNodeOfCheckpoint = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        // pathfinder = gameObject.GetComponent<Pathfinder>();
+        path = pathfinder.FindPath(transform.position, checkpoints[currentNodeOfCheckpoint].position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //MOVIMIENTO MEDIANTE ACTUALIZAR EL TRANSFORM
-        //transform.finalPosition += Vector3.up * Time.deltaTime * speed;
-        //MOVIMIENTO MEDIANTE FUERZAS
-        // transform.Translate(Vector3.up * speed * Time.deltaTime);
-        // transform.Translate(new Vector3(speed * Time.deltaTime,0,0) );
-        if (transform.position.y < 1.25 || transform.position.y > 6.25)
+        // if (Vector3.Distance(transform.position, checkpoints[currentNodeOfCheckpoint].position) < 0.05f && gameObject.GetComponent<CharacterMovement>().IsAtRest() )
+        // {
+        //     if (currentNodeOfCheckpoint == checkpoints.Count - 1)
+        //     {
+        //         currentNodeOfCheckpoint = 0;
+        //     }
+        //     else
+        //     {
+        //         currentNodeOfCheckpoint++;       
+        //     }
+        //     path = pathfinder.FindPath(transform.position, checkpoints[currentNodeOfCheckpoint].position);
+        // }
+        // else
+        if (transform.position == path[currentNodeOfPath] && currentNodeOfPath < path.Count)
         {
-            direction = (direction == Vector3.down) ? Vector3.up : Vector3.down;
+            if (currentNodeOfPath == path.Count - 1)
+            {
+                if (currentNodeOfCheckpoint == checkpoints.Count - 1)
+                {
+                    currentNodeOfCheckpoint = 0;
+                }
+                else
+                {
+                    currentNodeOfCheckpoint++;       
+                }
+                path = pathfinder.FindPath(transform.position, checkpoints[currentNodeOfCheckpoint].position);
+                currentNodeOfPath = 0;
+            }
+            else
+            {
+                currentNodeOfPath++;
+            }
+        }
+        else
+        {
+            Vector3 current = (path[currentNodeOfPath] - transform.position) / GameManager.gridCellSize;
+            // TODO pendiente programar un LookAtEnCharacterMovement.cs para rotar antes de moverse
+            // gameObject.transform.LookAt( this.path[currentNodeOfPath] );
+            gameObject.GetComponent<CharacterMovement>().MovePlayer(current);
+
         }
 
-        // transform.finalPosition += direction * Time.deltaTime * speed;
-        transform.Translate( direction * speed * Time.deltaTime );
+        // {
+        // }
     }
 }
