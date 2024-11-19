@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3549459687705224151}
   - component: {fileID: 3549459687705224157}
   - component: {fileID: 3549459687705224154}
-  - component: {fileID: 3549459687705224148}
-  - component: {fileID: 3549459687705224155}
+  - component: {fileID: 4281766176775741633}
+  - component: {fileID: 3096663997181414422}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Player
@@ -128,13 +128,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 7.5, y: 0.5, z: -2.5}
-  pathfinder: {fileID: 3549459687705224155}
+  pathfinder: {fileID: 3096663997181414422}
   checkpoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &3549459687705224148
+--- !u!114 &4281766176775741633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,11 +143,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3549459687705224149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81cbb11bf83dc994c939aa3a54478254, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e571e3082c0e4c4c83916cd89d4c230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetGridPosition: {x: 0, y: 0, z: 0}
---- !u!114 &3549459687705224155
+--- !u!114 &3096663997181414422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,8 +156,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3549459687705224149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3d9aca5ae53da41a19423382229985, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aa084d3330eac449b7646f4ae90ac6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalPosition: {x: 2.5, y: 0.5, z: 2.5}
+  finalPosition: {x: 0, y: 0, z: 0}
   startPosition: {x: 0, y: 0, z: 0}
