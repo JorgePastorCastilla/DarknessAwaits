@@ -12,6 +12,7 @@ public class Pathfinder : MonoBehaviour
     public Vector3 startPosition;
     private List<Vector3> foundCells = new List<Vector3>();
     private List<Vector3> alreadyCheckCells = new List<Vector3>();
+    private float maxToTimeOut = 5f;
     
     [SerializeField]
     // private List<Transform> patrolPath = new List<Transform>();
@@ -42,6 +43,7 @@ public class Pathfinder : MonoBehaviour
 
     public List<Vector3> FindPath(Vector3 startPosition, Vector3 finalPosition)
     {
+        float startTime = Time.time;
         Cell StartCell = new Cell(startPosition);
         StartCell.calculateGHF(startPosition, finalPosition);
         
@@ -53,6 +55,11 @@ public class Pathfinder : MonoBehaviour
         Cell currentCell = StartCell;
         while ( !positionIsInCells(alreadyCheckCells, finalPosition) )
         {
+            if (Time.time - startTime > maxToTimeOut)
+            {
+                return path;
+                break;
+            }
             foundCells = foundCells.OrderBy(x => x.f).ToList();
             int i = 0;
             currentCell = foundCells[i];

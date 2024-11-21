@@ -31,6 +31,7 @@ public class CharacterMovement : MonoBehaviour
     {
         unitsPerMovement = GameManager.gridCellSize;
         targetGridPosition = transform.position;
+        targetRotation = transform.eulerAngles;
     }
 
     void Update()
