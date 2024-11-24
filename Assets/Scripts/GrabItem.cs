@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GrabItem : MonoBehaviour
 {
@@ -21,17 +22,14 @@ public class GrabItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canGrabItem)
+        /*if (Input.GetKeyDown(KeyCode.F))
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                gameObject.SetActive(false);
-                grabItem.SetActive(true);
-                text.SetActive(false);
-                door.doorIsOpen = true;
-            }
-        }
+            GrabObject();
+        }*/
+        
     }
+    
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -48,5 +46,22 @@ public class GrabItem : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         canGrabItem = other.gameObject.CompareTag("Player");
+    }
+
+    private void GrabObject()
+    {
+        if (canGrabItem)
+        {
+            gameObject.SetActive(false);
+            grabItem.SetActive(true);
+            text.SetActive(false);
+            door.doorIsOpen = true;
+        }
+        
+    }
+
+    public void OnMouseDown()
+    {
+        GrabObject();
     }
 }

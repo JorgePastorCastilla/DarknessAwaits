@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1089362764
 RectTransform:
   m_ObjectHideFlags: 0
@@ -165,7 +165,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press F to grab
+  m_text: 'Click to grab/interact
+
+    with items'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -199,7 +201,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -502,6 +504,7 @@ GameObject:
   - component: {fileID: 7858544331064466743}
   - component: {fileID: 1844911081}
   - component: {fileID: 1844911080}
+  - component: {fileID: 5034124029437176812}
   m_Layer: 0
   m_Name: TorchEnviroment
   m_TagString: Untagged
@@ -553,3 +556,16 @@ MonoBehaviour:
   grabItem: {fileID: 0}
   text: {fileID: 1089362760}
   door: {fileID: 0}
+--- !u!65 &5034124029437176812
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858544331064466742}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.0827427, y: 1.6659349, z: 1}
+  m_Center: {x: 0.007991791, y: 0.2038005, z: 0}
