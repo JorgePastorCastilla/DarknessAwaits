@@ -58,7 +58,7 @@ public class Pathfinder : MonoBehaviour
             if (Time.time - startTime > maxToTimeOut)
             {
                 return path;
-                break;
+                // break;
             }
             foundCells = foundCells.OrderBy(x => x.f).ToList();
             int i = 0;

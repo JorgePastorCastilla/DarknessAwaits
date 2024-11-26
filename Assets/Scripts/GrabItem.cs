@@ -11,7 +11,7 @@ public class GrabItem : MonoBehaviour
     public GameObject text;
     private bool canGrabItem = false;
     
-    public Door door;
+    public InteractiveItem door;
     
     // Start is called before the first frame update
     void Start()
@@ -55,7 +55,7 @@ public class GrabItem : MonoBehaviour
             gameObject.SetActive(false);
             grabItem.SetActive(true);
             text.SetActive(false);
-            door.doorIsOpen = true;
+            door.Activate();
         }
         
     }
