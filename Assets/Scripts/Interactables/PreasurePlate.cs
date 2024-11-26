@@ -8,23 +8,17 @@ public class PreasurePlate : MonoBehaviour
     public InteractiveItem interactiveItem;
     private void OnTriggerEnter(Collider other)
     {
-        ActivateToggle();
+        if (!interactiveItem.isActive)
+        {
+            interactiveItem.Activate();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        ActivateToggle();
-    }
-
-    private void ActivateToggle()
-    {
         if (interactiveItem.isActive)
         {
             interactiveItem.Deactivate();
-        }
-        else
-        {
-            interactiveItem.Activate();
         }
     }
 }
