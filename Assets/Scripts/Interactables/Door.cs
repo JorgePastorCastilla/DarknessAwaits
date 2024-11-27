@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : InteractiveItem
 {
-    private Vector3 openOffset = new Vector3(0, 4f, 0);
+    private Vector3 openOffset;
     private Vector3 closePosition;
     private float transitionSpeed = 1.5f;
     
@@ -12,17 +12,17 @@ public class Door : InteractiveItem
     // Start is called before the first frame update
     void Start()
     {
+        float altura = (gameObject.transform.position.y * 2) * 1f;
+        openOffset = new Vector3(0, altura, 0);
+
         closePosition = transform.position;
+        
         AssignTargetPosition();
     }
-    // protected override void Update()
-    // {
-    //     Debug.Log("Se manda mensaje");
-    //     base.Update();
-    // }
+
     private void MoveDoor()
     {
-        if (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        if (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);    
         }
