@@ -59,9 +59,11 @@ public class MoveEnemy : MonoBehaviour
         else
         {
             Vector3 current = (path[currentNodeOfPath] - transform.position) / GameManager.gridCellSize;
-            // TODO pendiente programar un LookAtEnCharacterMovement.cs para rotar antes de moverse
+            gameObject.GetComponent<CharacterMovement>().Move(current);
+            // TODO pendiente programar un LookAt en CharacterMovement.cs para rotar antes de moverse
             // gameObject.transform.LookAt( this.path[currentNodeOfPath] );
-            gameObject.GetComponent<CharacterMovement>().MovePlayer(current);
+            // TODO NECESARIO CAMBIAR A ESTE METODO PARA QUE LA IA ROTE ANTES DE MOVERSE
+            // gameObject.GetComponent<CharacterMovement>().IAMove(current);
 
         }
 

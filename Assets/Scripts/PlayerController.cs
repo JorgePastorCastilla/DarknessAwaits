@@ -6,10 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private CharacterMovement playerMovement;
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+            gameManager = GameManager.instance;
     }
 
     // Update is called once per frame
@@ -29,19 +30,24 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            playerMovement.MovePlayer(transform.forward);
+            playerMovement.Move(transform.forward);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            playerMovement.MovePlayer(-transform.forward);
+            playerMovement.Move(-transform.forward);
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            playerMovement.MovePlayer(-transform.right);
+            playerMovement.Move(-transform.right);
         }
         if (Input.GetKey(KeyCode.E))
         {
-            playerMovement.MovePlayer(transform.right);
+            playerMovement.Move(transform.right);
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            //PAUSE MENU
         }
     }
 }

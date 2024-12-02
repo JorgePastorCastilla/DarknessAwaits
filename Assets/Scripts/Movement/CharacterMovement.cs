@@ -40,9 +40,10 @@ public class CharacterMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        MovePlayer();
+        Move();
+        
     }
-    private void MovePlayer()
+    private void Move()
     {
         Vector3 targetPosition = targetGridPosition;
 
@@ -75,7 +76,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public void MovePlayer(Vector3 direction)
+    public void Move(Vector3 direction)
     {
         if ( canMove() )
         {
@@ -86,6 +87,12 @@ public class CharacterMovement : MonoBehaviour
             targetGridPosition = targetGridPosition + direction;    
 
         }
+    }
+
+    public void IAMove()
+    {
+        transform.LookAt(targetGridPosition);
+        Move();
     }
 
     private bool canMove()
