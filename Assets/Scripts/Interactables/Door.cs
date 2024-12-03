@@ -12,13 +12,13 @@ public class Door : InteractiveItem
     // Start is called before the first frame update
     public virtual void Start()
     {
-        if (openOffset == null || openOffset == Vector3.zero)
+        if (openOffset == Vector3.zero)
         {
             float altura = (gameObject.transform.position.y * 2) * 1f;
             openOffset = new Vector3(0, altura, 0);
         }
 
-        if (transitionSpeed == null || transitionSpeed == 0)
+        if (transitionSpeed == 0)
         {
             transitionSpeed = 1.5f;
         }
