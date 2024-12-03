@@ -5,6 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    public static float gridCellSize = 5f;
+    
+    public GameObject player;
+    public GameObject pauseMenuCanvas;
+    public GameObject deathMenuCanvas;
+    public GameObject winMenuCanvas;
 
     public static GameManager instance
     {
@@ -19,12 +25,7 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-    
-    public static float gridCellSize = 5f;
-    
-    public GameObject player;
-    public GameObject pauseMenuCanvas;
-    
+
     //STATE MACHINE TO CONTROL THE STATE OF THE GAME PAUSE/PLAYING/DEAD/ETC
     // Start is called before the first frame update
     void Start()

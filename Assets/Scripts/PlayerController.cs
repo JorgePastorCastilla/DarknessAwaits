@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private CharacterMovement playerMovement;
     public GameManager gameManager;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -50,4 +51,6 @@ public class PlayerController : MonoBehaviour
             //PAUSE MENU
         }
     }
+
+
 }

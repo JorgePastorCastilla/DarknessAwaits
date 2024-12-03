@@ -7,10 +7,9 @@ using UnityEngine.EventSystems;
 public class GrabItem : MonoBehaviour
 {
     
-    public GameObject grabItem;
     public GameObject text;
     private bool canGrabItem = false;
-    
+    public Transform playerHand;
     public InteractiveItem door;
     
     // Start is called before the first frame update
@@ -52,9 +51,20 @@ public class GrabItem : MonoBehaviour
     {
         if (canGrabItem)
         {
-            gameObject.SetActive(false);
-            grabItem.SetActive(true);
+            transform.parent = playerHand;
+            // gameObject.SetActive(false);
+            // grabItem.SetActive(true);
+            // text.SetActive(false);
+            this.gameObject.GetComponent<GrabItem>().enabled = false;
+            Collider[] colliders = this.gameObject.GetComponents<Collider>();
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = false;
+            }
             text.SetActive(false);
+            transform.position = playerHand.transform.position;
+            transform.rotation = playerHand.transform.rotation;
+            gameObject.AddComponent<TorchlightTimer>();
             door.Activate();
         }
         

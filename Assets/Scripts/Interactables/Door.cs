@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Door : InteractiveItem
 {
-    private Vector3 openOffset;
+    public Vector3 openOffset;
     private Vector3 closePosition;
-    private float transitionSpeed = 1.5f;
+    public float transitionSpeed;
     
     private Vector3 targetPosition;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        float altura = (gameObject.transform.position.y * 2) * 1f;
-        openOffset = new Vector3(0, altura, 0);
+        if (openOffset == null || openOffset == Vector3.zero)
+        {
+            float altura = (gameObject.transform.position.y * 2) * 1f;
+            openOffset = new Vector3(0, altura, 0);
+        }
 
+        if (transitionSpeed == null || transitionSpeed == 0)
+        {
+            transitionSpeed = 1.5f;
+        }
         closePosition = transform.position;
         
         AssignTargetPosition();
