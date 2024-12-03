@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
             {
                 _instance = new GameObject().AddComponent<GameManager>();
                 _instance.name = _instance.GetType().ToString();
-                DontDestroyOnLoad(_instance);
+                // DontDestroyOnLoad(_instance);
             } 
             return _instance;
         }
@@ -32,6 +33,10 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         pauseMenuCanvas = GameObject.Find("PauseMenu");
+        pauseMenuCanvas.SetActive(false);
+        deathMenuCanvas = GameObject.Find("DeathMenu");
+        deathMenuCanvas.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -42,6 +47,9 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDeath()
     {
-        Debug.Log("Player Death");
+        deathMenuCanvas.SetActive(true);
+        player.GetComponent<PlayerController>().enabled = false;
+        
     }
+
 }
