@@ -3,7 +3,11 @@ guid: 8489b628aaeb03d41bd1ece0806a98c8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - pauseMenuCanvas: {instanceID: 0}
+  - deathMenuCanvas: {instanceID: 0}
+  - winMenuCanvas: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
