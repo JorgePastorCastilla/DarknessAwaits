@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TorchlightTimer : MonoBehaviour
 {
-    private float totalDuration = 15f;
+ 
+    private float totalDuration = 120f;// 2min/120secs
     private float currentDuration;
     private GameManager gameManager;
     // Start is called before the first frame update

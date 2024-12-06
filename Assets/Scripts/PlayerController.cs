@@ -46,9 +46,17 @@ public class PlayerController : MonoBehaviour
             playerMovement.Move(transform.right);
         }
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //PAUSE MENU
+            if (!gameManager.pauseMenuCanvas.activeSelf)
+            {
+                gameManager.OpenCanvas(gameManager.pauseMenuCanvas);    
+            }
+            else
+            {
+                gameManager.CloseCanvas(gameManager.pauseMenuCanvas);
+            }
+            
         }
     }
 

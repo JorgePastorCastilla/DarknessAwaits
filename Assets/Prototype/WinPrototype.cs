@@ -1,19 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class HUDManager : MonoBehaviour
+public class WinPrototype : MonoBehaviour
 {
-    public void ReturnToMainMenu()
+    private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("MainMenu");
+        if (other.CompareTag("Player"))
+        {
+            //Player win
+            GameManager.instance.PlayerWin();
+        }
     }
-    
-    public void ResumeGame()
-    {
-        GameManager.instance.CloseCanvas(this.gameObject);
-    }
+
     // Start is called before the first frame update
     void Start()
     {

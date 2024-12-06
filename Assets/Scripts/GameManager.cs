@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
         pauseMenuCanvas.SetActive(false);
         deathMenuCanvas = GameObject.Find("DeathMenu");
         deathMenuCanvas.SetActive(false);
+        winMenuCanvas = GameObject.Find("WinMenu");
+        winMenuCanvas.SetActive(false);
 
     }
 
@@ -47,9 +49,24 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDeath()
     {
-        deathMenuCanvas.SetActive(true);
-        player.GetComponent<PlayerController>().enabled = false;
-        
+        OpenCanvas(deathMenuCanvas);
+    }
+
+    public void PlayerWin()
+    {
+        OpenCanvas(winMenuCanvas);
+    }
+
+    public void OpenCanvas(GameObject canvas)
+    {
+        canvas.SetActive(true);
+        player.GetComponent<CharacterMovement>().enabled = false;
+    }
+    public void CloseCanvas(GameObject canvas)
+    {
+        canvas.SetActive(false);
+        player.GetComponent<CharacterMovement>().enabled = true;
+        // player.GetComponent<PlayerController>().enabled = true;
     }
 
 }
