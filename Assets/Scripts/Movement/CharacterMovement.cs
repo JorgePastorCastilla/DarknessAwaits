@@ -8,16 +8,17 @@ public class CharacterMovement : MonoBehaviour
 {
 
     private float unitsPerMovement;
-    private float transitionSpeed = 15f;
-    private float transitionRotationSpeed = 350f;
+    public float transitionSpeed = 15f;
+    public float transitionRotationSpeed = 350f;
 
     private Vector3 restorePosition = Vector3.zero;
 
     public Vector3 targetGridPosition;
-    private Vector3 targetRotation;
+    public Vector3 targetRotation;
 
     private float moveCooldown = 0.5f;
     private float lastTimeMoved = 0f;
+    public bool alreadyRotating = false;
     
 
     private void OnCollisionEnter(Collision other)
@@ -57,7 +58,10 @@ public class CharacterMovement : MonoBehaviour
         }
         
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
+        if (!alreadyRotating)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
+        }
     }
     public void RotateLeft()
     {
