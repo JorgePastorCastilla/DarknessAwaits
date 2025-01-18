@@ -65,7 +65,10 @@ public class GrabItem : MonoBehaviour
             transform.position = playerHand.transform.position;
             transform.rotation = playerHand.transform.rotation;
             gameObject.AddComponent<TorchlightTimer>();
-            door.Activate();
+            if (door != null)
+            {
+                door.Activate();    
+            }
         }
         
     }

@@ -7,6 +7,7 @@ public class SwitchItem : MonoBehaviour
     public InteractiveItem interactiveItem;
     // Start is called before the first frame update
     public bool switchOn = false;
+    public Animator animator;
     void Start()
     {
         
@@ -20,10 +21,14 @@ public class SwitchItem : MonoBehaviour
             if (interactiveItem.isActive)
             {
                 interactiveItem.Deactivate();
+                // animator.SetTrigger("TurnOff");
+                animator.SetBool("isActive", false);
             }
             else
             {
                 interactiveItem.Activate();
+                // animator.SetTrigger("TurnOn");
+                animator.SetBool("isActive", true);
             }
         }
     }
