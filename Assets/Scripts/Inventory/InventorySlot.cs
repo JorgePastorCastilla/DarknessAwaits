@@ -6,18 +6,6 @@ public class InventorySlot : MonoBehaviour
 {
     
     public GameObject heldItem;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetHeldItem(GameObject item)
     {
         heldItem = item;
