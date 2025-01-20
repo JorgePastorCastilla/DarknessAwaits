@@ -19,12 +19,17 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     // Update is called once per frame
     void Update()
     {
-        
+        if (draggedObject != null)
+        {
+            draggedObject.transform.position = Input.mousePosition;
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("OnPointerDown");
+        Debug.Log(eventData.pointerCurrentRaycast.gameObject);
+        
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
@@ -34,6 +39,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             {
                 draggedObject = slot.heldItem;
                 slot.heldItem = null;
+                lastItemSlot = clickedObject;
             }
         }
     }
@@ -41,6 +47,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public void OnPointerUp(PointerEventData eventData)
     {
         Debug.Log("OnPointerUp");
+        Debug.Log(eventData.pointerCurrentRaycast.gameObject);
 
         if (draggedObject != null && eventData.pointerCurrentRaycast.gameObject != null && eventData.button == PointerEventData.InputButton.Left)
         {
