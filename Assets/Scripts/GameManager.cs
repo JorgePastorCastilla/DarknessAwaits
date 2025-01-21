@@ -59,14 +59,21 @@ public class GameManager : MonoBehaviour
 
     public void OpenCanvas(GameObject canvas)
     {
-        canvas.SetActive(true);
-        player.GetComponent<CharacterMovement>().enabled = false;
+        ActiveDesactiveCanvas(canvas, true);
+        // canvas.SetActive(true);
+        // player.GetComponent<CharacterMovement>().enabled = false;
     }
     public void CloseCanvas(GameObject canvas)
     {
-        canvas.SetActive(false);
-        player.GetComponent<CharacterMovement>().enabled = true;
-        // player.GetComponent<PlayerController>().enabled = true;
+        ActiveDesactiveCanvas(canvas, false);
+        // canvas.SetActive(false);
+        // player.GetComponent<CharacterMovement>().enabled = true;
+    }
+
+    private void ActiveDesactiveCanvas(GameObject canvas, bool activate)
+    {
+        canvas.SetActive(activate);
+        player.GetComponent<CharacterMovement>().enabled = !activate;
     }
 
 }

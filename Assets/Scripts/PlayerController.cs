@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     float horizontalRotation = 0f;
     float verticalRotation = 0f;
     
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +67,6 @@ public class PlayerController : MonoBehaviour
             }
             
         }
-        //TODO El codigo de abajo hay que revisarlo entero
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             horizontalRotation = camera.rotation.eulerAngles.y;
@@ -113,12 +113,15 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Left");
                     _characterMovement.targetRotation -= Vector3.up * 90;
                 }
-                camera.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(_characterMovement.targetRotation), Time.deltaTime * _characterMovement.transitionRotationSpeed);
+                //TODO: CHANGE THIS TO AN SMOOTH CAMERA ROTATION
+                //camera.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(_characterMovement.targetRotation), Time.deltaTime * _characterMovement.transitionRotationSpeed);
+                camera.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 _characterMovement.alreadyRotating = false;
                 
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
+            
         }
     }
 
