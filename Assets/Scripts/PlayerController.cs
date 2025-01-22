@@ -67,7 +67,9 @@ public class PlayerController : MonoBehaviour
             }
             
         }
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        // The following code is for moving the camera to look around using right click
+        // maybe can be implemented later
+        /*if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             horizontalRotation = camera.rotation.eulerAngles.y;
             verticalRotation = 0f;
@@ -122,7 +124,7 @@ public class PlayerController : MonoBehaviour
                 Cursor.visible = true;
             }
             
-        }
+        }*/
     }
 
 

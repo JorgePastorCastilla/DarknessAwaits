@@ -65,6 +65,18 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
                 slot.SetHeldItem(draggedObject);
                 draggedObject = null;
             }
+            else
+            {
+                //EVENTDATA GAMEOBJECT ISN'T NULL BUT ITEM DRAG OVER SOMETHING THAT ISN'T A SLOT
+                lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
+                draggedObject = null;
+            }
+        }
+        else if(draggedObject != null && eventData.button == PointerEventData.InputButton.Left)
+        {
+            //WHEN DRAGGING AND OBJECT AND DROPPING OVER NULL OBJECT
+            lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
+            draggedObject = null;
         }
         
     }
