@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,10 @@ using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    
+    [SerializeField] GameObject[] slots = new GameObject[8];
+    [SerializeField] GameObject itemPrefab;
+    [SerializeField] GameObject ItemsContainer;
     
     GameObject draggedObject;
     GameObject lastItemSlot;
@@ -27,7 +32,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerDown");
+        // Debug.Log("OnPointerDown");
         Debug.Log(eventData.pointerCurrentRaycast.gameObject);
         
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -46,7 +51,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("OnPointerUp");
+        // Debug.Log("OnPointerUp");
         Debug.Log(eventData.pointerCurrentRaycast.gameObject);
 
         if (draggedObject != null && eventData.pointerCurrentRaycast.gameObject != null && eventData.button == PointerEventData.InputButton.Left)
@@ -79,5 +84,54 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             draggedObject = null;
         }
         
+    }
+
+    public void ItemPicked(GameObject pickedItem)
+    {
+        GameObject emptySlot = null;
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            InventorySlot slot = slots[i].GetComponent<InventorySlot>();
+
+            if (slot.heldItem == null)
+            {
+                emptySlot = slots[i];
+                break;
+            }
+        }
+
+        if (emptySlot != null)
+        {
+            GameObject newItem = Instantiate(itemPrefab);
+            newItem.GetComponent<InventoryItem>().itemScriptableObject = pickedItem.GetComponent<ItemPickable>().itemScriptableObject;
+            newItem.transform.SetParent(ItemsContainer.transform);//SET PARENT
+            newItem.transform.position = emptySlot.transform.position;
+            newItem.transform.localScale = Vector3.one;
+            
+            emptySlot.GetComponent<InventorySlot>().heldItem = newItem;
+            
+            Destroy(pickedItem);
+        }
+    }
+    
+    private void OnApplicationPause (bool paused)
+    {
+        if (draggedObject != null && paused)
+        {
+            // Not focused
+            lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
+            draggedObject = null;
+        }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (draggedObject != null && !hasFocus)
+        {
+            // Not focused
+            lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
+            draggedObject = null;
+        }
     }
 }
