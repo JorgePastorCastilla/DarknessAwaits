@@ -26,6 +26,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         if (draggedObject != null)
         {
+            draggedObject.transform.SetAsLastSibling();
             draggedObject.transform.position = Input.mousePosition;
         }
     }
@@ -33,7 +34,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public void OnPointerDown(PointerEventData eventData)
     {
         // Debug.Log("OnPointerDown");
-        Debug.Log(eventData.pointerCurrentRaycast.gameObject);
+        // Debug.Log(eventData.pointerCurrentRaycast.gameObject);
         
         if (eventData.button == PointerEventData.InputButton.Left)
         {
@@ -52,7 +53,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public void OnPointerUp(PointerEventData eventData)
     {
         // Debug.Log("OnPointerUp");
-        Debug.Log(eventData.pointerCurrentRaycast.gameObject);
+        // Debug.Log(eventData.pointerCurrentRaycast.gameObject);
 
         if (draggedObject != null && eventData.pointerCurrentRaycast.gameObject != null && eventData.button == PointerEventData.InputButton.Left)
         {
@@ -73,17 +74,59 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             else
             {
                 //EVENTDATA GAMEOBJECT ISN'T NULL BUT ITEM DRAG OVER SOMETHING THAT ISN'T A SLOT
-                lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
-                draggedObject = null;
+                Debug.Log("dropable area");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, GameManager.gridCellSize, ~LayerMask.GetMask("UI") ))
+                {
+                    ItemInteractiveWithInventory item = hit.collider.gameObject.GetComponent<ItemInteractiveWithInventory>();
+                    if (item != null)
+                    {
+                        if (item.isValid(draggedObject))
+                        {
+                            item.Interact(draggedObject);
+                            Destroy(draggedObject);
+                        }
+                        else
+                        {
+                            Debug.Log("This item is interactable but not valid with the dragged inventory item");
+                            ResetDraggedObject();
+                        }
+                        
+                        
+                        
+                    }
+                    else
+                    {
+                        Debug.Log("The selected item isn't interactable");
+                        ResetDraggedObject();
+                    }
+                }
+                else
+                {
+                    Debug.Log("Can't drop item here");
+                    ResetDraggedObject();
+                }
+                
+                /*lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
+                draggedObject = null;*/
             }
         }
         else if(draggedObject != null && eventData.button == PointerEventData.InputButton.Left)
         {
             //WHEN DRAGGING AND OBJECT AND DROPPING OVER NULL OBJECT
+            ResetDraggedObject();
+        }
+        
+    }
+
+    public void ResetDraggedObject()
+    {
+        if (draggedObject != null && lastItemSlot != null)
+        {
             lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
             draggedObject = null;
         }
-        
     }
 
     public void ItemPicked(GameObject pickedItem)
@@ -120,8 +163,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         if (draggedObject != null && paused)
         {
             // Not focused
-            lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
-            draggedObject = null;
+            ResetDraggedObject();
         }
     }
 
@@ -130,8 +172,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         if (draggedObject != null && !hasFocus)
         {
             // Not focused
-            lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
-            draggedObject = null;
+            ResetDraggedObject();
         }
     }
 }
