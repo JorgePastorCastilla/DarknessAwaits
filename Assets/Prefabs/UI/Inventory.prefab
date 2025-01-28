@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 2204173641019338616}
   - component: {fileID: 2204173641019338617}
   m_Layer: 5
-  m_Name: Inventory
+  m_Name: InventoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,28 +672,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  itemPrefab: {fileID: 0}
-  ItemsContainer: {fileID: 0}
+  - {fileID: 2204173641706014948}
+  - {fileID: 2204173642637009726}
+  - {fileID: 2204173641474030136}
+  - {fileID: 2204173642549103029}
+  - {fileID: 2204173641708846710}
+  - {fileID: 2204173640820707585}
+  - {fileID: 2204173642730938743}
+  - {fileID: 2204173641153254326}
+  itemPrefab: {fileID: 525598590373611834, guid: 40f368dbad26f24448c479dbb4360eda, type: 3}
+  ItemsContainer: {fileID: 2204173641054178823}
 --- !u!1 &2204173642549103029
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,11 +828,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 20
-    m_Right: 20
-    m_Top: 20
-    m_Bottom: 20
-  m_ChildAlignment: 0
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 95, y: 95}
@@ -1063,7 +1051,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3410140391655758153
