@@ -70,6 +70,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
                 lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(slot.heldItem);
                 slot.SetHeldItem(draggedObject);
                 draggedObject = null;
+                
             }
             else
             {
@@ -77,7 +78,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
                 Debug.Log("dropable area");
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, GameManager.gridCellSize, ~LayerMask.GetMask("UI") ))
+                if (Physics.Raycast(ray, out hit, GameManager.gridCellSize * 1.25f, ~LayerMask.GetMask("UI") ))
                 {
                     ItemInteractiveWithInventory item = hit.collider.gameObject.GetComponent<ItemInteractiveWithInventory>();
                     if (item != null)
@@ -92,9 +93,6 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
                             Debug.Log("This item is interactable but not valid with the dragged inventory item");
                             ResetDraggedObject();
                         }
-                        
-                        
-                        
                     }
                     else
                     {
@@ -107,9 +105,6 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
                     Debug.Log("Can't drop item here");
                     ResetDraggedObject();
                 }
-                
-                /*lastItemSlot.GetComponent<InventorySlot>().SetHeldItem(draggedObject);
-                draggedObject = null;*/
             }
         }
         else if(draggedObject != null && eventData.button == PointerEventData.InputButton.Left)

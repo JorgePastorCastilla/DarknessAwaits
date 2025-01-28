@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Trampa : Door
 {
@@ -12,5 +13,11 @@ public class Trampa : Door
             // Debug.Log("Trampa");
             other.gameObject.GetComponent<PlayerHealth>().DealDamage(50f);
         }
+    }
+
+    public void Update()
+    {
+        base.Update();
+        gameObject.GetComponent<BoxCollider>().isTrigger = !(gameObject.transform.position == closePosition + openOffset);
     }
 }

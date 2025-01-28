@@ -5,10 +5,10 @@ using UnityEngine;
 public class Door : InteractiveItem
 {
     public Vector3 openOffset;
-    private Vector3 closePosition;
+    public Vector3 closePosition;
     public float transitionSpeed;
     
-    private Vector3 targetPosition;
+    public Vector3 targetPosition;
     // Start is called before the first frame update
     public virtual void Start()
     {

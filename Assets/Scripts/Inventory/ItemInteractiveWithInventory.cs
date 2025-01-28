@@ -7,7 +7,7 @@ public class ItemInteractiveWithInventory : MonoBehaviour
     public InteractiveItem interactiveItem;
     public string[] validObjects;
 
-    public void Interact(GameObject item)
+    public virtual void Interact(GameObject item)
     {
         // DoSomething with item
         if (isValid(item))

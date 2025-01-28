@@ -28,7 +28,7 @@ public class PlayerPickUpItem : MonoBehaviour
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, GameManager.gridCellSize, ~layerToIgnore))
+        if (Physics.Raycast(ray, out hit, GameManager.gridCellSize * 1.25f, ~layerToIgnore))
         {
             ItemPickable item = hit.collider.gameObject.GetComponent<ItemPickable>();
 
