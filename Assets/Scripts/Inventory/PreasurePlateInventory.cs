@@ -20,7 +20,6 @@ public class PreasurePlateInventory : ItemInteractiveWithInventory
 
     public override void Interact(GameObject item)
     {
-        // DoSomething with item
         if (isValid(item))
         {
             itemPlaced = true;
