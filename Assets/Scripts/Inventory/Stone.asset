@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   name: stone
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: dbed5d0fa58d50f43837276d2be10e45, type: 3}
   prefab: {fileID: 9193104129785631310, guid: fe73d236e7b79ef4cb9421cf2b716c17, type: 3}
   stackMax: 1
