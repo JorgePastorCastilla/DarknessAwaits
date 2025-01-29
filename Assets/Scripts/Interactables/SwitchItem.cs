@@ -22,13 +22,22 @@ public class SwitchItem : MonoBehaviour
             {
                 interactiveItem.Deactivate();
                 // animator.SetTrigger("TurnOff");
-                animator.SetBool("isActive", false);
+                //Some objects like hidden doors have invisible switches but no animation
+                if (animator != null)
+                {
+                    animator.SetBool("isActive", false);    
+                }
+                
             }
             else
             {
                 interactiveItem.Activate();
                 // animator.SetTrigger("TurnOn");
-                animator.SetBool("isActive", true);
+                //Some objects like hidden doors have invisible switches but no animation
+                if (animator != null)
+                {
+                    animator.SetBool("isActive", true);    
+                }
             }
         }
     }

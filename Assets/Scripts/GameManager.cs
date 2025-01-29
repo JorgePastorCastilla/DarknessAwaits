@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
     {
         canvas.SetActive(activate);
         player.GetComponent<CharacterMovement>().enabled = !activate;
+        
+        GameObject torch = GameObject.Find("Torch");
+        torch.GetComponent<TorchlightTimer>().enabled = !activate;
+        
+        
     }
 
 }

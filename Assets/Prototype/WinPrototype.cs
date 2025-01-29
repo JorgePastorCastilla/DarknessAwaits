@@ -11,6 +11,7 @@ public class WinPrototype : MonoBehaviour
         {
             //Player win
             GameManager.instance.PlayerWin();
+            
         }
     }
 
