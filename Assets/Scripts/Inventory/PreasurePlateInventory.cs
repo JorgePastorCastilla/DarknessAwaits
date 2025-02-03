@@ -13,6 +13,10 @@ public class PreasurePlateInventory : ItemInteractiveWithInventory
     {
         if (itemPlaced && placedObject == null)
         {
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
             itemPlaced = false;
             interactiveItem.Deactivate();
         }
@@ -22,6 +26,10 @@ public class PreasurePlateInventory : ItemInteractiveWithInventory
     {
         if (isValid(item))
         {
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
             itemPlaced = true;
             placedObject = GameObject.Instantiate(item.GetComponent<InventoryItem>().itemScriptableObject.prefab, placedObjectPosition.position, new Quaternion(0,0,0,0) );
             interactiveItem.Activate();

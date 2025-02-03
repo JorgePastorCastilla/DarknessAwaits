@@ -9,6 +9,7 @@ public class Door : InteractiveItem
     public float transitionSpeed;
     
     public Vector3 targetPosition;
+    public bool audioIsOn = false;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -31,7 +32,16 @@ public class Door : InteractiveItem
     {
         if (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.time = 1f;
+                audioSource.Play();
+            }
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);    
+        }
+        else
+        {
+            audioSource.Stop();
         }
     }
     

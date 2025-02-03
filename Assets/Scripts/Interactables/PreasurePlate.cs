@@ -7,7 +7,7 @@ public class PreasurePlate : MonoBehaviour
 {
     public InteractiveItem interactiveItem;
     public PreasurePlateInventory preasurePlateInventory;
-
+    public AudioSource audioSource;
     private void Start()
     {
         preasurePlateInventory = gameObject.GetComponent<PreasurePlateInventory>();
@@ -18,6 +18,7 @@ public class PreasurePlate : MonoBehaviour
 
         if ( other.CompareTag("Player") && !preasurePlateInventory.itemPlaced && !interactiveItem.isActive )
         {
+            audioSource.Play();
             interactiveItem.Activate();
         }
     }
@@ -26,6 +27,7 @@ public class PreasurePlate : MonoBehaviour
     {
         if ( other.CompareTag("Player") && !preasurePlateInventory.itemPlaced && interactiveItem.isActive )
         {
+            audioSource.Play();
             interactiveItem.Deactivate();
         }
     }
