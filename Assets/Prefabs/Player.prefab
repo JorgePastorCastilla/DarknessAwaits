@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e571e3082c0e4c4c83916cd89d4c230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionSpeed: 15
+  transitionSpeed: 10
   transitionRotationSpeed: 350
   targetGridPosition: {x: 0, y: 0, z: 0}
   targetRotation: {x: 0, y: 0, z: 0}
