@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour
 {
 
     private float unitsPerMovement;
-    public float transitionSpeed = 10f;
+    public float transitionSpeed = 15f;
     public float transitionRotationSpeed = 350f;
 
     private Vector3 restorePosition = Vector3.zero;
