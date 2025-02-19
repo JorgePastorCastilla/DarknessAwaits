@@ -123,7 +123,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f9174586c8320ad4f8781c04f293a6c5, type: 2}
+  - {fileID: 2100000, guid: 4d744eda15dd67f43be245ce2883001b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,8 +172,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 0
   onlyActivateOnce: 0
+  audioSource: {fileID: 0}
   openOffset: {x: 0, y: 0, z: 0}
+  closePosition: {x: 0, y: 0, z: 0}
   transitionSpeed: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  audioIsOn: 0
 --- !u!1 &3113972679258159678
 GameObject:
   m_ObjectHideFlags: 0
