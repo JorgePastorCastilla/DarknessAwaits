@@ -11,6 +11,8 @@ public class GrabItem : MonoBehaviour
     private bool canGrabItem = false;
     public Transform playerHand;
     public InteractiveItem door;
+    public GameObject torchWall;
+    public GameObject torchHand;
     
     // Start is called before the first frame update
     void Start()
@@ -62,6 +64,8 @@ public class GrabItem : MonoBehaviour
                 collider.enabled = false;
             }
             text.SetActive(false);
+            torchWall.SetActive(false);
+            torchHand.SetActive(true);
             transform.position = playerHand.transform.position;
             transform.rotation = playerHand.transform.rotation;
             gameObject.AddComponent<TorchlightTimer>();
