@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1157391747263060830}
   - component: {fileID: 2047629403502535687}
   - component: {fileID: 5837153369101794083}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.003
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7351838199567485239}
   - component: {fileID: 8353458430303529754}
   - component: {fileID: 3824995984304796299}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.001
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 229316590454833739}
   - component: {fileID: 7470056731923120267}
   - component: {fileID: 4363029319970502688}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.001
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 1186761756162936995}
   - component: {fileID: 8605028092133916490}
   - component: {fileID: 2898154389938419543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.002
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 3476297392248646522}
   - component: {fileID: 3105797388015646641}
   - component: {fileID: 3060336233644751332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.003
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6424316905007036273}
   - component: {fileID: 8495450141984622511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: jailWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5939142472466394571}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 2}
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 2808487171335222081}
   - component: {fileID: 8487227759225540633}
   - component: {fileID: 9122141027348363503}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.004
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 186845265578248875}
   - component: {fileID: 1501131194039544031}
   - component: {fileID: 4422219239543793221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 2487553432330209919}
   - component: {fileID: 2137992250854935032}
   - component: {fileID: 4525313486336840370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.005
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   - component: {fileID: 8116938377182709558}
   - component: {fileID: 2384599239061138529}
   - component: {fileID: 3650297664993660001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.002
   m_TagString: Wall
   m_Icon: {fileID: 0}
