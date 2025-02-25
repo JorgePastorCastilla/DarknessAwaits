@@ -16,7 +16,7 @@ public class SwitchItem : MonoBehaviour
     // Update is called once per frame
     public virtual void OnMouseDown()
     {
-        if (switchOn)
+        if (switchOn && interactiveItem != null)
         {
             if (interactiveItem.isActive)
             {

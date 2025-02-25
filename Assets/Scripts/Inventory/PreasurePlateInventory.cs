@@ -18,7 +18,7 @@ public class PreasurePlateInventory : ItemInteractiveWithInventory
                 audioSource.Play();
             }
             itemPlaced = false;
-            interactiveItem.Deactivate();
+            DeactivateItems();
         }
     }
 
@@ -32,7 +32,7 @@ public class PreasurePlateInventory : ItemInteractiveWithInventory
             }
             itemPlaced = true;
             placedObject = GameObject.Instantiate(item.GetComponent<InventoryItem>().itemScriptableObject.prefab, placedObjectPosition.position, new Quaternion(0,0,0,0) );
-            interactiveItem.Activate();
+            ActivateItems();
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PreasurePlate : MonoBehaviour
 {
-    public InteractiveItem interactiveItem;
+    public InteractiveItem[] interactiveItems;
     public PreasurePlateInventory preasurePlateInventory;
     public AudioSource audioSource;
     private void Start()
@@ -16,19 +16,41 @@ public class PreasurePlate : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if ( other.CompareTag("Player") && !preasurePlateInventory.itemPlaced && !interactiveItem.isActive )
+        if ( other.CompareTag("Player") && !preasurePlateInventory.itemPlaced )
         {
             audioSource.Play();
-            interactiveItem.Activate();
+            ActivateItems();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if ( other.CompareTag("Player") && !preasurePlateInventory.itemPlaced && interactiveItem.isActive )
+        if ( other.CompareTag("Player") && !preasurePlateInventory.itemPlaced )
         {
             audioSource.Play();
-            interactiveItem.Deactivate();
+            DeactivateItems();
+        }
+    }
+    
+    public void ActivateItems()
+    {
+        foreach (InteractiveItem item in interactiveItems)
+        {
+            if (!item.isActive)
+            {
+                item.Activate();
+            }
+        }
+    }
+    
+    public void DeactivateItems()
+    {
+        foreach (InteractiveItem item in interactiveItems)
+        {
+            if (item.isActive)
+            {
+                item.Deactivate();
+            }
         }
     }
 }

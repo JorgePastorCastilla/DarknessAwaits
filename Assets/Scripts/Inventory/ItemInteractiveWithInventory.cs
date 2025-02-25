@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemInteractiveWithInventory : MonoBehaviour
 {
-    public InteractiveItem interactiveItem;
+    public InteractiveItem[] interactiveItems;
     public string[] validObjects;
     public AudioSource audioSource;
 
@@ -22,7 +22,7 @@ public class ItemInteractiveWithInventory : MonoBehaviour
             {
                 audioSource.Play();
             }
-            interactiveItem.Activate();
+            ActivateItems();
         }
     }
 
@@ -39,5 +39,21 @@ public class ItemInteractiveWithInventory : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void ActivateItems()
+    {
+        foreach (InteractiveItem item in interactiveItems)
+        {
+            item.Activate();
+        }
+    }
+    
+    public void DeactivateItems()
+    {
+        foreach (InteractiveItem item in interactiveItems)
+        {
+            item.Deactivate();
+        }
     }
 }
