@@ -6,7 +6,14 @@ using UnityEngine;
 
 public class NetworkingDataScriptableObject : ScriptableObject
 {
-    public string apiUrl = "https://api-zombies-axgcdcasenevhjcj.spaincentral-01.azurewebsites.net/api";
+    public string apiUrl = "https://apidarknessawaits.azurewebsites.net/api";
+    public User user;
     public string token;
+
+    public void InitializeData()
+    {
+        token = "";
+        user = new User();
+    }
 }
 

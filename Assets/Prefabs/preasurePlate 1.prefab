@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1930339049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1930339050}
+  m_Layer: 0
+  m_Name: PlacedObjectPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1930339050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930339049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0.002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4906128882849280954}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5718941048079886592
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,13 +59,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5718941048079886592}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 65, y: 0.1, z: 45}
   m_LocalScale: {x: 50, y: 50, z: 50}
-  m_Children: []
+  m_Children:
+  - {fileID: 1930339050}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &8338917929425632287
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -93,7 +124,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5718941048079886592}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.04, y: 0.03999999, z: 0.003999999}
@@ -110,9 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c5744c67c2ad5d4689575e1e3777a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactiveItems: []
+  interactiveItems:
+  - {fileID: 0}
   preasurePlateInventory: {fileID: 0}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 4275810402544348409}
 --- !u!114 &4488646147987414927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,10 +157,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10c11936812a1e4d9442f59f8fd81e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactiveItems: []
-  validObjects: []
-  audioSource: {fileID: 0}
-  placedObjectPosition: {fileID: 0}
+  interactiveItems:
+  - {fileID: 0}
+  validObjects:
+  - stone
+  audioSource: {fileID: 4275810402544348409}
+  placedObjectPosition: {fileID: 1930339050}
   placedObject: {fileID: 0}
   itemPlaced: 0
 --- !u!82 &4275810402544348409
@@ -141,8 +175,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 7cfd4c25530346d47ae3f375df6602a4, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
