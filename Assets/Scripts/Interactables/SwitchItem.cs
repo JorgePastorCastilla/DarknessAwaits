@@ -5,13 +5,8 @@ using UnityEngine;
 public class SwitchItem : MonoBehaviour
 {
     public InteractiveItem interactiveItem;
-    // Start is called before the first frame update
     public bool switchOn = false;
     public Animator animator;
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     public virtual void OnMouseDown()
