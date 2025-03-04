@@ -16,6 +16,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField login_emailInput, login_passwordInput, register_nameInput, register_emailInput, register_passwordInput;
 
     public NetworkingDataScriptableObject loginDataSO;
+    
 
     public void login(string email = "", string password = "")
     {
