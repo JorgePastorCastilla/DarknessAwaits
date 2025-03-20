@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TorchlightTimer : MonoBehaviour
 {
  
-    private float totalDuration = 120f;// 2min/120secs
+    private float totalDuration = 240f;// 4min/240secs
     private float currentDuration;
     private GameManager gameManager;
 
