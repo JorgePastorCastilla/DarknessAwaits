@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenuCanvas;
     public GameObject deathMenuCanvas;
     public GameObject winMenuCanvas;
+    
+    public bool playerIsDead = false;
 
     public static GameManager instance
     {
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         deathMenuCanvas.SetActive(false);
         winMenuCanvas = GameObject.Find("WinMenu");
         winMenuCanvas.SetActive(false);
+        
 
     }
 
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         OpenCanvas(deathMenuCanvas);
+        playerIsDead = true;
     }
 
     public void PlayerWin()
@@ -60,12 +64,16 @@ public class GameManager : MonoBehaviour
     public void OpenCanvas(GameObject canvas)
     {
         ActiveDesactiveCanvas(canvas, true);
+        Time.timeScale = 0f;
+        AudioListener.pause = true;
         // canvas.SetActive(true);
         // player.GetComponent<CharacterMovement>().enabled = false;
     }
     public void CloseCanvas(GameObject canvas)
     {
         ActiveDesactiveCanvas(canvas, false);
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
         // canvas.SetActive(false);
         // player.GetComponent<CharacterMovement>().enabled = true;
     }
@@ -76,7 +84,11 @@ public class GameManager : MonoBehaviour
         player.GetComponent<CharacterMovement>().enabled = !activate;
         
         GameObject torch = GameObject.Find("Torch");
-        torch.GetComponent<TorchlightTimer>().enabled = !activate;
+        if ( torch.GetComponent<TorchlightTimer>() != null )
+        {
+            torch.GetComponent<TorchlightTimer>().enabled = !activate;
+        }
+        
         
         
     }

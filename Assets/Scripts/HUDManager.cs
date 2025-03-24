@@ -7,22 +7,25 @@ public class HUDManager : MonoBehaviour
 {
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        GoToScene("MainMenu");
     }
     
     public void ResumeGame()
     {
+        Time.timeScale = 1;
         GameManager.instance.CloseCanvas(this.gameObject);
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    public void TryAgain()
     {
-        
+        Time.timeScale = 1;
+        GoToScene("Prototype");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void GoToScene(string sceneName)
     {
-        
+        Time.timeScale = 1;
+        SceneManager.LoadScene(sceneName);
     }
+    
 }

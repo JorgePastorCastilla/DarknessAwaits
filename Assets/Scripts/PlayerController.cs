@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     float horizontalRotation = 0f;
     float verticalRotation = 0f;
     
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,40 +25,43 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO: Comprobar si conviene usar VARIABLES LIKE FORWARD,BACKWARD, RIGHT, LEFT AND CHANGE THEM AS WE ROTATE
-        //TODO: CAMBIAR AL NEW INPUT SYSTEM
+
         //MOVEMENT
-        if ( Input.GetKeyDown(KeyCode.A) )
+        if (_characterMovement.isActiveAndEnabled)
         {
-            playerMovement.RotateLeft();
-        }
-        if ( Input.GetKeyDown(KeyCode.D) )
-        {
-            playerMovement.RotateRight();
+            if ( Input.GetKeyDown(KeyCode.A) )
+            {
+                playerMovement.RotateLeft();
+            }
+            if ( Input.GetKeyDown(KeyCode.D) )
+            {
+                playerMovement.RotateRight();
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                playerMovement.Move(transform.forward);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                playerMovement.Move(-transform.forward);
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                playerMovement.Move(-transform.right);
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                playerMovement.Move(transform.right);
+            }
         }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            playerMovement.Move(transform.forward);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            playerMovement.Move(-transform.forward);
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            playerMovement.Move(-transform.right);
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            playerMovement.Move(transform.right);
-        }
-
+        //PAUSE MENU
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!gameManager.pauseMenuCanvas.activeSelf)
             {
-                gameManager.OpenCanvas(gameManager.pauseMenuCanvas);    
+                gameManager.OpenCanvas(gameManager.pauseMenuCanvas);
             }
             else
             {
