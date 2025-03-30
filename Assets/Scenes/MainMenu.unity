@@ -267,6 +267,8 @@ GameObject:
   - component: {fileID: 607396013}
   - component: {fileID: 607396012}
   - component: {fileID: 607396011}
+  - component: {fileID: 607396015}
+  - component: {fileID: 607396014}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -339,6 +341,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &607396014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607396010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851d5c4e6ffbab940a0462ccd7a479f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ditherShader: {fileID: 4800000, guid: 3def5a2e3407cae4eb321c0c456fe16a, type: 3}
+  spread: 0.1
+  redColorCount: 10
+  greenColorCount: 10
+  blueColorCount: 10
+  bayerLevel: 2
+  downSamples: 0
+  pointFilterDown: 0
+--- !u!114 &607396015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607396010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a145f2c8b5b96774883b5fe3bc8b06ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectMaterial: {fileID: 0}
 --- !u!1 &805960856
 GameObject:
   m_ObjectHideFlags: 0
