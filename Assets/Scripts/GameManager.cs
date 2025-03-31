@@ -63,19 +63,25 @@ public class GameManager : MonoBehaviour
 
     public void OpenCanvas(GameObject canvas)
     {
-        ActiveDesactiveCanvas(canvas, true);
-        Time.timeScale = 0f;
-        AudioListener.pause = true;
-        // canvas.SetActive(true);
-        // player.GetComponent<CharacterMovement>().enabled = false;
+        if (!playerIsDead)
+        {
+            ActiveDesactiveCanvas(canvas, true);
+            Time.timeScale = 0f;
+            AudioListener.pause = true;
+            // canvas.SetActive(true);
+            // player.GetComponent<CharacterMovement>().enabled = false;
+        }
     }
     public void CloseCanvas(GameObject canvas)
     {
-        ActiveDesactiveCanvas(canvas, false);
-        Time.timeScale = 1f;
-        AudioListener.pause = false;
-        // canvas.SetActive(false);
-        // player.GetComponent<CharacterMovement>().enabled = true;
+        if (!playerIsDead)
+        {
+            ActiveDesactiveCanvas(canvas, false);
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+            // canvas.SetActive(false);
+            // player.GetComponent<CharacterMovement>().enabled = true;
+        }
     }
 
     private void ActiveDesactiveCanvas(GameObject canvas, bool activate)
