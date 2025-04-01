@@ -24,7 +24,7 @@ public class StatueEye : ItemInteractiveWithInventory
             jewel.transform.parent = transform;
             jewel.transform.localPosition = Vector3.zero;
             jewel.transform.localRotation = Quaternion.identity;
-            jewel.transform.localScale = Vector3.one;
+            jewel.transform.localScale = new Vector3(15,15,15);
             
             if (otherEye.eyeIsActive)
             {

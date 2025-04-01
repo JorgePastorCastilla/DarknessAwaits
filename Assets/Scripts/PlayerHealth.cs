@@ -23,7 +23,11 @@ public class PlayerHealth : MonoBehaviour
         healthPoints--;
         if (!isAlive())
         {
-            gameManager.PlayerDeath();
+            //trigger death animation
+            // GetComponent<CharacterMovement>().enabled = false;
+            // GetComponent<PlayerController>().enabled = false;
+            // GetComponent<Animator>().SetTrigger("PlayerDeath");
+            KillPlayer();
         }
     }
 
@@ -32,11 +36,20 @@ public class PlayerHealth : MonoBehaviour
         healthPoints -= damage;
         if (!isAlive())
         {
-            gameManager.PlayerDeath();
+            // GetComponent<CharacterMovement>().enabled = false;
+            // GetComponent<PlayerController>().enabled = false;
+            // GetComponent<Animator>().SetTrigger("PlayerDeath");
+            KillPlayer();
+
         }
     }
     private bool isAlive()
     {
         return healthPoints > 0;
+    }
+
+    public void KillPlayer()
+    {
+        gameManager.PlayerDeath();
     }
 }
