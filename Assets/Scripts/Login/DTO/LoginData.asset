@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef49179be971494fb6efaf1b01049af, type: 3}
   m_Name: LoginData
   m_EditorClassIdentifier: 
-  apiUrl: https://apidarknessawaits.azurewebsites.net/api
-  token: 
-  username: 
-  email: 
+  apiUrl: https://phpstack-1076337-5399863.cloudwaysapps.com/api
+  token: 'fyWGkq96GJroFQBn07JGDJL2Qp7aoYVaqduQKOF5HGO97AdbGagdOeoynKyF  '
