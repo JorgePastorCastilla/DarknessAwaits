@@ -11,8 +11,11 @@ public class ClassificationManagerWithoutLogin : MonoBehaviour
 {
     public NetworkingDataScriptableObject loginDataSO;
     public GameObject classificationTextPrefab;
+    public TMP_InputField usernameInputField;
 
     public Transform container;
+
+    public GameObject formulario;
     // public GameObject classificationPanel;
 
     public void Start()
@@ -24,6 +27,11 @@ public class ClassificationManagerWithoutLogin : MonoBehaviour
     {
         Debug.Log("Getting Classification");
         StartCoroutine(TryGetClassification());
+    }
+    public void PushClassification()
+    {
+        Debug.Log("Getting Classification");
+        StartCoroutine(TryPushClassification());
     }
     
     private IEnumerator TryGetClassification()
@@ -53,7 +61,9 @@ public class ClassificationManagerWithoutLogin : MonoBehaviour
             Debug.Log(classificationsRoot.Data);
             UserDTOWithoutLogin[] classifications = classificationsRoot.Data;
 
-            
+            foreach (Transform child in container) {
+                GameObject.Destroy(child.gameObject);
+            }
             foreach (var classification in classifications)
             {
                 var classificationText = Instantiate(classificationTextPrefab, container);
@@ -62,5 +72,46 @@ public class ClassificationManagerWithoutLogin : MonoBehaviour
             }
             
             httpClient.Dispose();
+    }
+    
+    private IEnumerator TryPushClassification()
+    {
+        UnityWebRequest httpRequest = new UnityWebRequest();
+        httpRequest.method = UnityWebRequest.kHttpVerbPOST;
+        httpRequest.url = loginDataSO.apiUrl + "/classification";
+        httpRequest.SetRequestHeader("Content-type", "application/json");
+        httpRequest.SetRequestHeader("Accept", "application/json");
+        
+        SendClassificationDTO sendClassificationDto = new SendClassificationDTO();
+        sendClassificationDto.api_token = loginDataSO.token;
+        sendClassificationDto.name = usernameInputField.text;
+        sendClassificationDto.puntuacion = loginDataSO.puntuacion;
+        
+        string jsonData = JsonConvert.SerializeObject(sendClassificationDto);
+        byte[] dataToSend = Encoding.UTF8.GetBytes(jsonData);
+        httpRequest.uploadHandler = new UploadHandlerRaw(dataToSend);
+        
+        httpRequest.downloadHandler = new DownloadHandlerBuffer();
+        
+        yield return httpRequest.SendWebRequest();
+
+        if (httpRequest.result == UnityWebRequest.Result.ConnectionError || httpRequest.result == UnityWebRequest.Result.ProtocolError)
+        {
+            throw new Exception("Send Classification: " + httpRequest.error);  
+        }
+        
+        // Debug.Log(httpRequest.result.ToString());
+        
+        string jsonResponse = httpRequest.downloadHandler.text;
+        
+        formulario.SetActive(false);
+        // UserDTO registeredUser = JsonConvert.DeserializeObject<UserDTO>(jsonResponse);
+        
+        
+        Debug.Log(jsonResponse);
+        
+        GetClassification();
+        
+        
     }
 }

@@ -10,6 +10,7 @@ public class NetworkingDataScriptableObject : ScriptableObject
     public string apiUrl = "https://phpstack-1076337-5399863.cloudwaysapps.com/api";
     public User user;
     public string token;
+    public float puntuacion;
 
     public void InitializeData()
     {

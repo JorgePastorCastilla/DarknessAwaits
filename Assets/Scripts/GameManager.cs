@@ -53,12 +53,14 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         OpenCanvas(deathMenuCanvas);
+        deathMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>().GetClassification();
         playerIsDead = true;
     }
 
     public void PlayerWin()
     {
         OpenCanvas(winMenuCanvas);
+        winMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>().GetClassification();
     }
 
     public void OpenCanvas(GameObject canvas)

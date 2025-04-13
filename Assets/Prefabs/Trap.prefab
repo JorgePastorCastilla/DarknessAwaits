@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3731453516378233163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8513859188708840953}
   - component: {fileID: 8513859188708840952}
   - component: {fileID: 8513859188708840951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pinchos
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 930541876136535821}
   - component: {fileID: 1802136034760951072}
   - component: {fileID: 6915865015629651121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
