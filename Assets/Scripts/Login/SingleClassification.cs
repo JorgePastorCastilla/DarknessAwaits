@@ -12,6 +12,6 @@ public class SingleClassification : MonoBehaviour
     public void SetTexts(string username, float points)
     {
         this.username.text = username;
-        this.points.text = points.ToString("0000.00");
+        this.points.text = points.ToString("0000");
     }
 }

@@ -17,6 +17,7 @@ public class CombinationSwitch : SwitchItem
       {
         bool newValue = animator.GetBool("isActive");
         animator.SetBool("isActive", !newValue);
+        audioSource.Play();
       }
       if (CanActivateDeactivate())
       {

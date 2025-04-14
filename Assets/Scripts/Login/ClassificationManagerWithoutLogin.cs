@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using TMPro;
@@ -16,8 +17,17 @@ public class ClassificationManagerWithoutLogin : MonoBehaviour
     public Transform container;
 
     public GameObject formulario;
+
+    public int numberOfScoresShown = 5;
+    
+    public TextMeshProUGUI scoreText;
     // public GameObject classificationPanel;
 
+    public void RefreshScore()
+    {
+        loginDataSO.puntuacion = GameManager.instance.finalScore;
+        scoreText.text = loginDataSO.puntuacion.ToString("0000");
+    }
     public void Start()
     {
         GetClassification();
@@ -60,10 +70,18 @@ public class ClassificationManagerWithoutLogin : MonoBehaviour
             
             Debug.Log(classificationsRoot.Data);
             UserDTOWithoutLogin[] classifications = classificationsRoot.Data;
-
+            
+            //Empty list before filling it
             foreach (Transform child in container) {
                 GameObject.Destroy(child.gameObject);
             }
+
+            //Limit how many scores will be shown on the top
+            if (classifications.Length > numberOfScoresShown)
+            {
+                classifications = classifications.Take(numberOfScoresShown).ToArray();
+            }
+            //Creating the gameobjects which will show each score
             foreach (var classification in classifications)
             {
                 var classificationText = Instantiate(classificationTextPrefab, container);

@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public Quaternion cameraRotation = new Quaternion();
     float horizontalRotation = 0f;
     float verticalRotation = 0f;
+
+    public float score = 0f;
     
     // Start is called before the first frame update
     void Start()
@@ -25,9 +27,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
         //MOVEMENT
-        if (_characterMovement.isActiveAndEnabled)
+        if (!gameManager.gameIsPaused)
         {
             if ( Input.GetKeyDown(KeyCode.A) )
             {

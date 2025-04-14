@@ -14,7 +14,11 @@ public class GameManager : MonoBehaviour
     public GameObject winMenuCanvas;
     
     public bool playerIsDead = false;
-
+    public bool gameIsPaused = false;
+        
+    public float maxScore = 420f;
+    public float finalScore;
+    public NetworkingDataScriptableObject networkData;
     public static GameManager instance
     {
         get
@@ -53,14 +57,34 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         OpenCanvas(deathMenuCanvas);
-        deathMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>().GetClassification();
         playerIsDead = true;
+        ClassificationManagerWithoutLogin classification_component = deathMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>();
+        classification_component.GetClassification();
+        SetScore();
+        classification_component.RefreshScore();
     }
 
     public void PlayerWin()
     {
         OpenCanvas(winMenuCanvas);
-        winMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>().GetClassification();
+        ClassificationManagerWithoutLogin classification_component = winMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>();
+        classification_component.GetClassification();
+        SetScore();
+        classification_component.RefreshScore();
+    }
+
+    public void SetScore()
+    {
+        finalScore = (maxScore - player.GetComponent<PlayerScore>().score); // Segundos restantes
+        
+        if (playerIsDead == true)
+        {
+            finalScore *= 5;
+        }
+        else
+        {
+            finalScore *= 30;
+        }
     }
 
     public void OpenCanvas(GameObject canvas)
@@ -88,8 +112,9 @@ public class GameManager : MonoBehaviour
 
     private void ActiveDesactiveCanvas(GameObject canvas, bool activate)
     {
+        gameIsPaused = activate;
         canvas.SetActive(activate);
-        player.GetComponent<CharacterMovement>().enabled = !activate;
+        // player.GetComponent<CharacterMovement>().enabled = !activate;
         
         GameObject torch = GameObject.Find("Torch");
         if ( torch.GetComponent<TorchlightTimer>() != null )

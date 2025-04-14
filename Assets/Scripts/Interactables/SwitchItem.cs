@@ -7,7 +7,7 @@ public class SwitchItem : MonoBehaviour
     public InteractiveItem interactiveItem;
     public bool switchOn = false;
     public Animator animator;
-
+    public AudioSource audioSource;
     // Update is called once per frame
     public virtual void OnMouseDown()
     {
@@ -34,6 +34,7 @@ public class SwitchItem : MonoBehaviour
                     animator.SetBool("isActive", true);    
                 }
             }
+            audioSource.Play();
         }
     }
 }
