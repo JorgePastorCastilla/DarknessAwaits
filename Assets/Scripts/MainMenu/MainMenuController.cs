@@ -5,17 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
+    public GameObject MainMenuCanvas;
+    public GameObject ScoresCanvas;
+    public ClassificationManagerWithoutLogin classification;
 
     public void LoadScene(string SceneIndex)
     {
@@ -34,5 +27,18 @@ public class MainMenuController : MonoBehaviour
         // }
         Application.Quit();
 
+    }
+
+    public void ShowScores()
+    {
+        ScoresCanvas.SetActive(true);
+        classification.GetClassification();
+        MainMenuCanvas.SetActive(false);
+    }
+
+    public void BackToMain()
+    {
+        ScoresCanvas.SetActive(false);
+        MainMenuCanvas.SetActive(true);
     }
 }
