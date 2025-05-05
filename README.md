@@ -14,3 +14,5 @@ Puedes revisar el <strong>GDD(Game Design Document)</strong> pinchando [aqui](ht
 La pizarra virtual se puede visualizar haciendo click [aqui](https://miro.com/app/board/uXjVLIDAago=/?share_link_id=481179023191)
 # Clickup
 La gestion de proyecto que realizamos mediante clickup se puede consultar [aqui](https://app.clickup.com/9012405433/v/s/90121754985)
+# Pagina web
+La pagina web se puede visitar [aqui](https://samuelhenareschoaibi.github.io/Darkness-Awaits/)
