@@ -34,7 +34,12 @@ public class SwitchItem : MonoBehaviour
                     animator.SetBool("isActive", true);    
                 }
             }
-            audioSource.Play();
+
+            if (audioSource != null)
+            {
+                audioSource.Play();    
+            }
+            
         }
     }
 }

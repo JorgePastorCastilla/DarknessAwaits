@@ -58,19 +58,19 @@ public class GameManager : MonoBehaviour
     {
         OpenCanvas(deathMenuCanvas);
         playerIsDead = true;
-        ClassificationManagerWithoutLogin classification_component = deathMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>();
-        classification_component.GetClassification();
-        SetScore();
-        classification_component.RefreshScore();
+        // ClassificationManagerWithoutLogin classification_component = deathMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>();
+        // classification_component.GetClassification();
+        // SetScore();
+        // classification_component.RefreshScore();
     }
 
     public void PlayerWin()
     {
         OpenCanvas(winMenuCanvas);
-        ClassificationManagerWithoutLogin classification_component = winMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>();
-        classification_component.GetClassification();
-        SetScore();
-        classification_component.RefreshScore();
+        // ClassificationManagerWithoutLogin classification_component = winMenuCanvas.GetComponent<ClassificationManagerWithoutLogin>();
+        // classification_component.GetClassification();
+        // SetScore();
+        // classification_component.RefreshScore();
     }
 
     public void SetScore()
